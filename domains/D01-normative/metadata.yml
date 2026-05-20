@@ -1,0 +1,44 @@
+id: D01
+title: Нормативно-правовая база
+slug: D01-normative
+cluster: regulatory
+version: 0.1.0
+status: draft
+
+applicability:
+  vuz: required
+  spo: required
+  do: required
+  dpo: required
+  aspirantura: required
+
+typical_owner: Юридический отдел / Ректорат / Директор
+
+last_reviewed: 2026-05-20
+review_cycle_months: 3
+
+related_to:
+  - D02
+  - D03
+  - D04
+  - D05
+  - D06
+  - D07
+  - D08
+  - D09
+  - D10
+  - D11
+  - D12
+  - D13
+
+regulatory_refs:
+  - "ФЗ-273 — Об образовании в Российской Федерации"
+  - "ФЗ-124 — Об основных гарантиях прав ребенка"
+  - "ФЗ-152 — О персональных данных"
+
+cds_tag: false
+
+gis_integrations: []
+
+authors:
+  - iMironRU
