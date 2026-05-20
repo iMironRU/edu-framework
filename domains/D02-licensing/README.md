@@ -52,6 +52,17 @@ D02 описывает: что нужно для получения лиценз
 
 Полная таблица с кодами ОКВЭД: [`best-practices/opf-education-levels.md`](best-practices/opf-education-levels.md)
 
+## Содержимое домена
+
+| Файл | Что внутри |
+|---|---|
+| [processes/D02-P01.md](processes/D02-P01.md) | Получение и переоформление лицензии — пошаговый процесс, пакет документов |
+| [processes/D02-P02.md](processes/D02-P02.md) | Государственная аккредитация образовательных программ |
+| [data-model/entities.md](data-model/entities.md) | Лицензия, Приложения, Свидетельство об аккредитации, Дело лицензиата |
+| [best-practices/opf-education-levels.md](best-practices/opf-education-levels.md) | Таблица ОПФ × ОКВЭД × доступные уровни образования |
+| [GUIDE.md](GUIDE.md) | Когда нужно переоформление, кто лицензирует, типовые ошибки |
+| [CHANGELOG.md](CHANGELOG.md) | История изменений домена |
+
 ## Связи с другими доменами
 
 ```
