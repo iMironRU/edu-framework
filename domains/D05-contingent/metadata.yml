@@ -1,0 +1,60 @@
+id: D05
+title: Управление контингентом
+slug: D05-contingent
+cluster: core
+version: 0.1.0
+status: draft
+
+applicability:
+  vuz: required
+  spo: required
+  do: required
+  dpo: required
+  aspirantura: required
+
+typical_owner: Учебно-методическое управление / Деканат / Отдел кадров обучающихся
+last_reviewed: 2026-05-20
+review_cycle_months: 6
+
+short_title: Контингент
+
+depends_on:
+  - D01
+  - D04
+
+related_to:
+  - D06
+  - D09
+  - D13
+
+regulatory_refs:
+  - "ФЗ-273 — ст. 53 (возникновение образовательных отношений)"
+  - "ФЗ-273 — ст. 54 (договор об образовании)"
+  - "ФЗ-273 — ст. 55 (общие требования к приёму)"
+  - "ФЗ-273 — ст. 61 (прекращение образовательных отношений)"
+  - "Приказ Минобрнауки № 1114 от 24.12.2013 (приём на программы ВО)"
+  - "Приказ Минпросвещения № 958 от 02.09.2020 (приём на программы СПО)"
+  - "ФЗ-152 — обработка персональных данных обучающихся"
+
+gis_integrations:
+  - Суперсервис «Поступление в вуз онлайн»
+  - ФИС «Моя школа» (для ДО)
+  - ЕСИА / Госуслуги
+  - ФИС ФРД (сведения о документах об образовании)
+  - ФГИС «Контингент»
+
+cds_tag: true
+
+packs:
+  - vuz-base
+  - spo-base
+  - admission
+
+tags:
+  - contingent
+  - students
+  - admission
+  - enrollment
+
+authors:
+  - iMironRU

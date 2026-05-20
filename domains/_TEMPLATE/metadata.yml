@@ -1,0 +1,66 @@
+# metadata.yml — машиночитаемые метаданные домена
+# Канонический пример. Скопируйте и заполните для нового домена.
+# Валидация: python tools/validate-metadata.py domains/<slug>/metadata.yml
+
+# --- ОБЯЗАТЕЛЬНЫЕ ПОЛЯ ---
+
+id: D00                        # D01–D13, не меняется после присвоения
+title: Название домена         # каноническое русское название
+slug: D00-slug                 # имя папки домена
+cluster: regulatory            # regulatory | core | staff-science | support | external | crosscutting
+version: 0.1.0                 # semver: major.minor.patch
+status: draft                  # draft | review | stable | deprecated
+
+applicability:
+  vuz: required                # required | partial | not-applicable
+  spo: required
+  do: required
+  dpo: required
+  aspirantura: required
+
+typical_owner: Роль-владелец   # кто в ОО обычно отвечает за домен
+last_reviewed: 2026-05-20      # YYYY-MM-DD
+review_cycle_months: 12        # как часто пересматривать
+
+# --- НЕОБЯЗАТЕЛЬНЫЕ, НО ЖЕЛАТЕЛЬНЫЕ ---
+
+short_title: Короткое имя      # для индексов и графов (до 20 символов)
+
+depends_on:                    # домены, от которых зависит этот
+  - D01
+
+related_to:                    # смежные домены (без жёсткой зависимости)
+  - D03
+
+regulatory_refs:               # нормативная база с привязкой к конкретным нормам
+  - "ФЗ-273 — ст. 28, ч. 3"
+  - "Приказ Минобрнауки № XXXX от DD.MM.YYYY"
+  - "ФГОС ВО — раздел IV"
+
+gis_integrations:              # внешние ГИС, с которыми взаимодействует домен
+  # - Суперсервис «Поступление в вуз онлайн»
+  # - ФИС ФРД
+  # - ЕСИА / Госуслуги
+  # - ЦЦС Минобрнауки
+  # - ФИС «Моя школа»
+
+cds_tag: false                 # true если в домене есть ЦОС-процессы
+
+packs:                         # в какие готовые наборы входит
+  # - vuz-base
+  # - spo-base
+  # - licensing
+  # - accreditation
+
+tags:
+  - example
+
+applicability_notes: |         # пояснения для partial/not-applicable
+  Заполнить если applicability содержит partial или not-applicable.
+
+authors:
+  - github-username
+
+# --- ЗАПОЛНЯЕТСЯ АВТОМАТИЧЕСКИ ---
+# created_at: устанавливается при первом merge в main
+# superseded_by: DXX  ← только при status: deprecated

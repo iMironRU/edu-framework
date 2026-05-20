@@ -1,0 +1,222 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/edu-framework/standards/fgos/schema/fgos-vo.schema.json",
+  "title": "ФГОС ВО (3++)",
+  "description": "JSON Schema для Федерального государственного образовательного стандарта высшего образования",
+  "type": "object",
+  "required": ["meta", "volume", "competencies", "blocks"],
+  "properties": {
+
+    "meta": {
+      "type": "object",
+      "description": "Идентификация и реквизиты стандарта",
+      "required": ["id", "direction_code", "direction_name", "qualification", "approved_date", "order_number"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^FGOS-VO-\\d{6}-\\d{4}$",
+          "description": "Идентификатор: FGOS-VO-XXXXXX-YYYY",
+          "example": "FGOS-VO-090301-2021"
+        },
+        "direction_code": {
+          "type": "string",
+          "pattern": "^\\d{2}\\.\\d{2}\\.\\d{2}$",
+          "description": "Код направления подготовки",
+          "example": "09.03.01"
+        },
+        "direction_name": {
+          "type": "string",
+          "description": "Наименование направления подготовки",
+          "example": "Информатика и вычислительная техника"
+        },
+        "qualification": {
+          "type": "string",
+          "enum": ["бакалавр", "магистр", "специалист"],
+          "description": "Квалификация выпускника"
+        },
+        "approved_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Дата утверждения приказом Минобрнауки (YYYY-MM-DD)"
+        },
+        "order_number": {
+          "type": "string",
+          "description": "Номер приказа Минобрнауки об утверждении"
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Ссылка на официальный PDF на fgos.ru"
+        },
+        "json_version": {
+          "type": "string",
+          "description": "Версия JSON-представления (semver)",
+          "default": "0.1.0"
+        }
+      }
+    },
+
+    "volume": {
+      "type": "object",
+      "description": "Объём и сроки освоения программы",
+      "required": ["total_credits", "duration_years"],
+      "properties": {
+        "total_credits": {
+          "type": "integer",
+          "description": "Объём программы в зачётных единицах (з.е.), всего",
+          "example": 240
+        },
+        "duration_years": {
+          "type": "object",
+          "description": "Нормативный срок обучения по форме",
+          "properties": {
+            "full_time": { "type": "number", "description": "Очная форма" },
+            "part_time": { "type": "number", "description": "Очно-заочная форма" },
+            "distance": { "type": "number", "description": "Заочная форма" }
+          }
+        },
+        "practice_credits_min": {
+          "type": "integer",
+          "description": "Минимальный объём практики в з.е."
+        },
+        "gia_credits_min": {
+          "type": "integer",
+          "description": "Минимальный объём ГИА в з.е."
+        }
+      }
+    },
+
+    "competencies": {
+      "type": "object",
+      "description": "Компетенции выпускника",
+      "properties": {
+        "universal": {
+          "type": "array",
+          "description": "Универсальные компетенции (УК)",
+          "items": { "$ref": "#/definitions/Competency" }
+        },
+        "general_professional": {
+          "type": "array",
+          "description": "Общепрофессиональные компетенции (ОПК)",
+          "items": { "$ref": "#/definitions/Competency" }
+        },
+        "professional": {
+          "type": "array",
+          "description": "Профессиональные компетенции (ПК) — если заданы стандартом",
+          "items": { "$ref": "#/definitions/Competency" }
+        }
+      }
+    },
+
+    "blocks": {
+      "type": "object",
+      "description": "Структура программы: блоки и их объём",
+      "properties": {
+        "B1": {
+          "type": "object",
+          "description": "Блок 1: Дисциплины (модули)",
+          "properties": {
+            "credits_min": { "type": "integer" },
+            "mandatory_modules": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Module" }
+            }
+          }
+        },
+        "B2": {
+          "type": "object",
+          "description": "Блок 2: Практика",
+          "properties": {
+            "credits_min": { "type": "integer" },
+            "types": {
+              "type": "array",
+              "description": "Виды практик",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": { "type": "string", "enum": ["учебная", "производственная", "преддипломная"] },
+                  "credits_min": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "B3": {
+          "type": "object",
+          "description": "Блок 3: Государственная итоговая аттестация",
+          "properties": {
+            "credits_min": { "type": "integer" },
+            "elements": {
+              "type": "array",
+              "description": "Элементы ГИА (госэкзамен, ВКР)",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "requirements": {
+      "type": "object",
+      "description": "Требования к условиям реализации программы",
+      "properties": {
+        "staff": {
+          "type": "object",
+          "properties": {
+            "phd_share_min": {
+              "type": "number",
+              "description": "Доля преподавателей с учёной степенью, минимум (0–1)",
+              "example": 0.7
+            },
+            "practitioners_share_min": {
+              "type": "number",
+              "description": "Доля преподавателей-практиков, минимум (0–1)",
+              "example": 0.1
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "Competency": {
+      "type": "object",
+      "required": ["code", "name"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код компетенции",
+          "example": "УК-1"
+        },
+        "name": {
+          "type": "string",
+          "description": "Формулировка компетенции"
+        },
+        "indicators": {
+          "type": "array",
+          "description": "Индикаторы достижения компетенции",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": { "type": "string", "example": "УК-1.1" },
+              "name": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "Module": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "credits_min": { "type": "integer" },
+        "competencies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Коды компетенций, формируемых модулем"
+        }
+      }
+    }
+  }
+}
