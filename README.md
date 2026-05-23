@@ -33,6 +33,7 @@
 | Получение или переоформление лицензии | [D02 → D02-P01](domains/D02-licensing/processes/D02-P01.md) |
 | Государственная аккредитация | [D02 → D02-P02](domains/D02-licensing/processes/D02-P02.md) |
 | Приёмная кампания | [D05 → D05-P01](domains/D05-contingent/processes/D05-P01.md) |
+| Конкурсный отбор и ранжирование | [D05 → D05-P03](domains/D05-contingent/processes/D05-P03.md) |
 | Зачисление обучающегося | [D05 → D05-P02](domains/D05-contingent/processes/D05-P02.md) |
 | Мониторинг изменений законодательства | [D01 → D01-P01](domains/D01-normative/processes/D01-P01.md) |
 
