@@ -20,3 +20,8 @@ env/
 # Logs / temp
 *.log
 tmp/
+
+# Секреты и рабочие файлы инструментов
+.env
+reviews/
+docs/review-status.json
