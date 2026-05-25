@@ -1,0 +1,361 @@
+{
+   "description": "Cписок профилей поступающих (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "id_jwt": {
+         "$ref": "#/definitions/int8",
+         "description": "Уникальный идентификатор запроса на обработку данных (токена)"
+      },
+      "entity_action": {
+         "$ref": "#/definitions/string50",
+         "description": "Имя сущности и действие над сущностью сконкатенированное через '.'. Например \"spo_сampaign_list.add\""
+      },
+      "stage": {
+         "$ref": "#/definitions/stage_type",
+         "description": "Наименование стадии обработки на которой завершилось выполнение токена"
+      },
+      "success_result_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "unique_code_profile": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код поступающего"
+               },
+               "id": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Id поступающего"
+               },
+               "snils": {
+                  "$ref": "#/definitions/snils_type",
+                  "description": "СНИЛС"
+               },
+               "id_gender": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Пол. Идентификатор классификатора gender_cls"
+               },
+               "birthday": {
+                  "$ref": "#/definitions/date",
+                  "description": "Дата рождения. Шаблон \"2006-01-02\""
+               },
+               "birthplace": {
+                  "$ref": "#/definitions/string1024",
+                  "description": "Место рождения"
+               },
+               "phone": {
+                  "$ref": "#/definitions/string25",
+                  "description": "Номер телефона"
+               },
+               "email": {
+                  "$ref": "#/definitions/string256",
+                  "description": "Электронная почта"
+               },
+               "id_free_education_reason": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Основание для получения бесплатного образования (для иностранца). Идентификатор классификатора free_education_reason_cls"
+               },
+               "address_list": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "full_addr": {
+                           "$ref": "#/definitions/string1024",
+                           "description": "Полный адрес"
+                        },
+                        "id_region": {
+                           "$ref": "#/definitions/int4",
+                           "description": "Идентификатор классификатора region_cls"
+                        },
+                        "index": {
+                           "$ref": "#/definitions/string6",
+                           "description": "Индекс"
+                        }
+                     },
+                     "required": [
+                        "full_addr",
+                        "id_region"
+                     ]
+                  }
+               },
+               "legal_representative_info": {
+                  "description": "Данные о родителе (законном представителе)",
+                  "type": "object",
+                  "additionalProperties": { "type": "null" },
+                  "properties": {
+                     "fio": {
+                        "$ref": "#/definitions/string500",
+                        "description": "ФИО родителя (законного представителя)"
+                     },
+                     "phone": {
+                        "$ref": "#/definitions/string25",
+                        "description": "Телефон"
+                     },
+                     "email": {
+                        "$ref": "#/definitions/string256",
+                        "description": "Электронная почта"
+                     }
+                  },
+                  "required": [
+                     "fio",
+                     "phone"
+                  ]
+               },
+               "identification_list": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "id": {
+                           "$ref": "#/definitions/int8",
+                           "description": "Идентификатор"
+                        },
+                        "surname": {
+                           "$ref": "#/definitions/string256",
+                           "description": "Фамилия"
+                        },
+                        "name": {
+                           "$ref": "#/definitions/string256",
+                           "description": "Имя"
+                        },
+                        "patronymic": {
+                           "$ref": "#/definitions/string256",
+                           "description": "Отчество"
+                        },
+                        "doc_series": {
+                           "$ref": "#/definitions/string50",
+                           "description": "Серия паспорта"
+                        },
+                        "doc_number": {
+                           "$ref": "#/definitions/string50",
+                           "description": "Номер паспорта"
+                        },
+                        "issue_date": {
+                           "$ref": "#/definitions/string200",
+                           "format": "date",
+                           "description": "Дата выдачи"
+                        },
+                        "doc_org": {
+                           "$ref": "#/definitions/string256",
+                           "description": "Организация, выдавшая документ"
+                        },
+                        "subdivision_code": {
+                           "$ref": "#/definitions/string50",
+                           "description": "Код подразделения"
+                        },
+                        "id_document_type": {
+                           "$ref": "#/definitions/int8",
+                           "description": "Тип документа"
+                        },
+                        "created_at": {
+                           "type": "string",
+                           "format": "date-time",
+                           "description": "Дата создания"
+                        },
+                        "is_current": {
+                           "type": "boolean",
+                           "description": "Признак активного ДУЛ"
+                        }
+                     },
+                     "required": [
+                        "id",
+                        "doc_series",
+                        "doc_number",
+                        "issue_date",
+                        "doc_org",
+                        "id_document_type",
+                        "created_at",
+                        "is_current"
+                     ]
+                  }
+               },
+               "photo": {
+                   "type": "object",
+                   "additionalProperties": { "type": "null" },
+                   "properties": {
+                       "fui": {
+                               "$ref": "#/definitions/fui_type"
+                           },
+                           "file_hash": {
+                               "$ref": "#/definitions/file_hash_type"
+                           }
+                       
+                   },
+                   "required": [
+                           "fui",
+                           "file_hash"
+                       ]
+               }
+            },
+            "required": [
+               "id_object",
+               "id",
+               "id_gender",
+               "birthday",
+               "birthplace"
+            ]
+         },
+         "minItems": 1,
+         "description": "Список успешно обработанных объектов"
+      },
+      "error_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "code": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код ошибки"
+               },
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках токена"
+               },
+               "description": {
+                  "$ref": "#/definitions/string350",
+                  "description": "Описание ошибки"
+               },
+               "params": {
+                  "type": [
+                     "array",
+                     "null"
+                  ],
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "key": {
+                           "$ref": "#/definitions/string50"
+                        },
+                        "value": {
+                           "$ref": "#/definitions/string350"
+                        }
+                     },
+                     "required": [
+                        "key",
+                        "value"
+                     ]
+                  }
+               },
+               "time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Время формирования ответа"
+               }
+            },
+            "required": [
+               "code",
+               "description",
+               "time"
+            ]
+         }
+      }
+   },
+   "required": [
+      "id_jwt",
+      "entity_action",
+      "stage"
+   ],
+   "definitions": {
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      },
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "file_hash_type": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 32
+      },
+      "fui_type": {
+        "type": "string",
+        "minLength": 60,
+        "maxLength": 65
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string6": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 6
+      },
+      "string25": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 25
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      },
+      "string256": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 256
+      },
+      "string350": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 350
+      },
+      "string500": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 500
+      },
+      "string1024": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 1024
+      },
+      "snils_type": {
+         "type": "string",
+         "pattern": "^\\d{11}$",
+         "description": "СНИЛС"
+      },
+      "stage_type": {
+         "type": "string",
+         "enum": [
+            "validate",
+            "business"
+         ]
+      },
+      "date": {
+         "type": "string",
+         "format": "date",
+         "description": "Дата в формате YYYY-MM-DD"
+      },
+      "date-time": {
+         "type": "string",
+         "format": "date-time",
+         "description": "Дата и время в формате RFC3339"
+      }
+   }
+}

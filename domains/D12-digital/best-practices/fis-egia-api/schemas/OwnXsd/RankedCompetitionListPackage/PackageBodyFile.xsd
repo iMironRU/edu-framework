@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="RankedCompetition">
+               <xs:annotation>
+                  <xs:documentation>Конкурсный список (сущность)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element type="BigIntType" name="IdCompetition">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор конкурса (CompetitionList) в рамках организации сгенерированный Сервисом приема</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:dateTime" name="Created">
+                        <xs:annotation>
+                           <xs:documentation>Дата и время формирования КС вузом. В формате "2022-02-02T09:00:00+03:00". Значение только по московскому времени</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element name="Entrant" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                           <xs:all>
+                              <xs:element type="BigIntType" name="IdEntrant">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор профиля поступающего (EntrantList) сгенерированный Сервисом приема</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="UniqueCodeProfile">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный код поступающего (для формирования конкурсных списков и списков поступающих)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="Priority">
+                                 <xs:annotation>
+                                    <xs:documentation>Приоритет зачисления, указанный поступающим по данной конкурсной группе</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="MainTopPriority">
+                                 <xs:annotation>
+                                    <xs:documentation>Основной высший приоритет</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="HighestPassagewayPriority">
+                                 <xs:annotation>
+                                    <xs:documentation>Высший проходной приоритет</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="Rating">
+                                 <xs:annotation>
+                                    <xs:documentation>Ранг (позиция в списке) (Обязательно: от 1 до кол-ва заявлений)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="WithoutTests">
+                                 <xs:annotation>
+                                    <xs:documentation>Отметка о поступлении БВИ</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String255Type" name="WithoutTestsComment" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Основание приема без вступительных испытаний</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String255Type" name="EntranceTest1">
+                                 <xs:annotation>
+                                    <xs:documentation>Наименование ВИ №1 (необязательно к заполнению)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="EntranceTestType1">
+                                 <xs:annotation>
+                                    <xs:documentation>Тип результата ВИ1 (TRUE - ЕГЭ, FALSE - не ЕГЭ)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value1000Type" name="Result1">
+                                 <xs:annotation>
+                                    <xs:documentation>Балл ВИ1 (до трех знаков после запятой)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String255Type" name="EntranceTest2">
+                                 <xs:annotation>
+                                    <xs:documentation>Наименование ВИ №2 (необязательно к заполнению)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="EntranceTestType2">
+                                 <xs:annotation>
+                                    <xs:documentation>Тип результата ВИ2 (TRUE - ЕГЭ, FALSE - не ЕГЭ)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value1000Type" name="Result2">
+                                 <xs:annotation>
+                                    <xs:documentation>Балл ВИ2 (до трех знаков после запятой)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String255Type" name="EntranceTest3">
+                                 <xs:annotation>
+                                    <xs:documentation>Наименование ВИ №3 (необязательно к заполнению)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="EntranceTestType3">
+                                 <xs:annotation>
+                                    <xs:documentation>Тип результата ВИ3 (TRUE - ЕГЭ, FALSE - не ЕГЭ)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value1000Type" name="Result3">
+                                 <xs:annotation>
+                                    <xs:documentation>Балл ВИ3 (до трех знаков после запятой)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String255Type" name="EntranceTest4" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Наименование ВИ №4 (необязательно к заполнению)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="EntranceTestType4" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Тип результата ВИ4 (TRUE - ЕГЭ, FALSE - не ЕГЭ)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value1000Type" name="Result4" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Балл ВИ4 (до трех знаков после запятой)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String255Type" name="EntranceTest5" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Наименование ВИ №5 (необязательно к заполнению)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="EntranceTestType5" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Тип результата ВИ5 (TRUE - ЕГЭ, FALSE - не ЕГЭ)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value1000Type" name="Result5" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Балл ВИ5 (до трех знаков после запятой)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String255Type" name="EntranceTest6" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Наименование ВИ №6 (необязательно к заполнению)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="EntranceTestType6" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Тип результата ВИ6 (TRUE - ЕГЭ, FALSE - не ЕГЭ)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value1000Type" name="Result6" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Балл ВИ6 (до трех знаков после запятой)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String255Type" name="EntranceTest7" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Наименование ВИ №7 (необязательно к заполнению)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="EntranceTestType7" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Тип результата ВИ7 (TRUE - ЕГЭ, FALSE - не ЕГЭ)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value1000Type" name="Result7" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Балл ВИ7 (до трех знаков после запятой)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String255Type" name="EntranceTest8" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Наименование ВИ №8 (необязательно к заполнению)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="EntranceTestType8" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Тип результата ВИ8 (TRUE - ЕГЭ, FALSE - не ЕГЭ)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value1000Type" name="Result8" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Балл ВИ8 (до трех знаков после запятой)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value1000Type" name="AchievementsMark">
+                                 <xs:annotation>
+                                    <xs:documentation>Количество баллов за общие индивидуальные достижения</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value5Type" name="TargetAchievementMark" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Количество баллов за целевые индивидуальные достижения</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value8000Type" name="EntranceTestMark">
+                                 <xs:annotation>
+                                    <xs:documentation>Сумма баллов за ВИ (до трех знаков после запятой)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Value10000Type" name="SumMark">
+                                 <xs:annotation>
+                                    <xs:documentation>Сумма конкурсных баллов (до трех знаков после запятой)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="Benefit9">
+                                 <xs:annotation>
+                                    <xs:documentation>Наличие преимущественного права зачисления в соответствии с частью 9 статьи 71 Федерального закона N 273-ФЗ</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="Benefit10">
+                                 <xs:annotation>
+                                    <xs:documentation>Наличие преимущественного права зачисления в соответствии с частью 10 статьи 71 Федерального закона N 273-ФЗ</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="PaidContract">
+                                 <xs:annotation>
+                                    <xs:documentation>Наличие заключенного договора о платном образовании</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:all>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String255Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="255" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Value5Type">
+      <xs:restriction base="xs:nonNegativeInteger">
+         <xs:minInclusive value="0" />
+         <xs:maxInclusive value="5" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Value1000Type">
+      <xs:restriction base="xs:float">
+         <xs:minInclusive value="0" />
+         <xs:maxInclusive value="1000" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Value10000Type">
+      <xs:restriction base="xs:float">
+         <xs:minInclusive value="0" />
+         <xs:maxInclusive value="10000" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Value8000Type">
+      <xs:restriction base="xs:float">
+         <xs:minInclusive value="0" />
+         <xs:maxInclusive value="8000" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

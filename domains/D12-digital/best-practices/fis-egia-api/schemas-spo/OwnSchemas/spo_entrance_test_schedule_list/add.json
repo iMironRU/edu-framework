@@ -1,0 +1,71 @@
+{
+   "description": "Записи на ВИ которые назначены организацией для отправки на ЕПГУ (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_entrance_test_schedule_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления (сущность spo_application_list)"
+               },
+               "id_specialty": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор специальности (сущность spo_specialty_list)"
+               },
+               "test_name": {
+                  "$ref": "#/definitions/string256",
+                  "description": "Название ВИ"
+               },
+               "test_place": {
+                  "$ref": "#/definitions/string1024",
+                  "description": "Место проведения ВИ"
+               },
+               "test_date_time": {
+                  "type": "string",
+                  "format": "date-time"
+               }
+            },
+            "required": [
+               "id_object",
+               "id_application",
+               "id_specialty",
+               "test_name",
+               "test_place",
+               "test_date_time"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_entrance_test_schedule_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "string256": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 256
+      },
+      "string1024": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 1024
+      }
+   }
+}

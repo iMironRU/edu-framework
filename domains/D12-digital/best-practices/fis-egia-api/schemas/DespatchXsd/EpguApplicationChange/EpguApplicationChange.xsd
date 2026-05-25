@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="EpguApplicationChange">
+               <xs:annotation>
+                  <xs:documentation>Изменения общих параметров заявления из ЕПГУ</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element type="BigIntType" name="IdApplication">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор заявления</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="BigIntType" name="IdEpgu">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор заявления на ЕПГУ</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:boolean" name="FirstHigherEducation">
+                        <xs:annotation>
+                           <xs:documentation>Признак первого образования</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element name="NeedHostelList" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Необходимость в общежитии</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element name="Organization" minOccurs="1" maxOccurs="unbounded">
+                                 <xs:annotation>
+                                    <xs:documentation>Вуз (головной или филиал), в который есть потребность в общежитии</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:complexType>
+                                    <xs:all>
+                                       <xs:element type="OgrnType" name="Ogrn">
+                                          <xs:annotation>
+                                             <xs:documentation>Огрн организации</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element type="KppType" name="Kpp">
+                                          <xs:annotation>
+                                             <xs:documentation>Кпп организации</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                    </xs:all>
+                                 </xs:complexType>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element type="Int4Type" name="IdDictionaryValueMusic" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Музыкальный инструмент. Уникальный идентификатор справочника вуза (DictionaryValueList) в рамках организации сгенерированный организацией</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:boolean" name="ExtraTestAttribute">
+                        <xs:annotation>
+                           <xs:documentation>Признак участия путем сдачи ВИ</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element name="CompetitiveGroupList">
+                        <xs:annotation>
+                           <xs:documentation>Список конкурсных групп</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element name="CompetitiveGroup" minOccurs="1" maxOccurs="unbounded">
+                                 <xs:annotation>
+                                    <xs:documentation>Конкурсная группа</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:complexType>
+                                    <xs:all>
+                                       <xs:element type="BigIntType" name="IdCompetitiveGroup">
+                                          <xs:annotation>
+                                             <xs:documentation>Уникальный идентификатор КГ заявления (CompetitiveGroupList)</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element type="BigIntType" name="IdCompetition">
+                                          <xs:annotation>
+                                             <xs:documentation>Уникальный идентификатор конкурса (CompetitionList) </xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element type="Int4Type" name="IdStatus">
+                                          <xs:annotation>
+                                             <xs:documentation>Статус КГ заявления. Идентификатор классификатора CompetitiveGroupStatusCls</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element type="xs:dateTime" name="CreatedDateTime">
+                                          <xs:annotation>
+                                             <xs:documentation>Дата и время создания КГ. Формат RFC3339 шаблон "2006-01-02T15:04:05+03:00". Значение только по московскому времени</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element name="Priority">
+                                          <xs:annotation>
+                                             <xs:documentation>Приоритет КГ заявления</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:complexType>
+                                             <xs:choice>
+                                                <xs:element type="xs:positiveInteger" name="PriorityTarget">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Приоритет целевой квоты</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                                <xs:element type="xs:positiveInteger" name="PriorityOther">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Приоритет иных мест</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                             </xs:choice>
+                                          </xs:complexType>
+                                       </xs:element>
+                                       <xs:element type="xs:dateTime" name="PriorityUpdatedDateTime">
+                                          <xs:annotation>
+                                             <xs:documentation>Время последнего редактирования приоритета. Формат RFC3339 шаблон "2006-01-02T15:04:05+03:00". Значение только по московскому времени</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element type="SourceType" name="PrioritySource">
+                                          <xs:annotation>
+                                             <xs:documentation>Источник изменения приоритета</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element name="DictionaryValueSportList" minOccurs="0">
+                                          <xs:annotation>
+                                             <xs:documentation>Указать список видов спорта</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:complexType>
+                                             <xs:sequence>
+                                                <xs:element type="Int4Type" name="Id" minOccurs="1" maxOccurs="unbounded">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Вид спорта. Уникальный идентификатор справочника вуза (DictionaryValueList) в рамках организации сгенерированный Сервисом приема</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                             </xs:sequence>
+                                          </xs:complexType>
+                                       </xs:element>
+                                       <xs:element name="BenefitList" minOccurs="0">
+                                          <xs:annotation>
+                                             <xs:documentation>Особые права КГ заявлений</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:complexType>
+                                             <xs:sequence>
+                                                <xs:element name="Benefit" minOccurs="1" maxOccurs="unbounded">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Особое право КГ заявления</xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:complexType>
+                                                      <xs:sequence>
+                                                         <xs:element type="BigIntType" name="IdDocument">
+                                                            <xs:annotation>
+                                                               <xs:documentation>Уникальный идентификатор документа (DocumentList) сгенерированный Сервисом приема</xs:documentation>
+                                                            </xs:annotation>
+                                                         </xs:element>
+                                                         <xs:element type="Int4Type" name="IdBenefit">
+                                                            <xs:annotation>
+                                                               <xs:documentation>Идентификатор льготы. Идентификатор классификатора BenefitCls</xs:documentation>
+                                                            </xs:annotation>
+                                                         </xs:element>
+                                                      </xs:sequence>
+                                                   </xs:complexType>
+                                                </xs:element>
+                                             </xs:sequence>
+                                          </xs:complexType>
+                                       </xs:element>
+                                       <xs:element name="TargetCompetitiveGroup" minOccurs="0">
+                                          <xs:annotation>
+                                             <xs:documentation>Данные по целевой КГ</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:complexType>
+                                             <xs:sequence>
+                                                <xs:element type="xs:boolean" name="LegalGuardianConsents">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Согласие законного представителя на заключение целевого договора (TRUE - подано, FALSE - не подано или не требуются)</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="File" minOccurs="0">
+                                                   <xs:complexType>
+                                                      <xs:all>
+                                                         <xs:element type="FileHashType" name="FileHash">
+                                                            <xs:annotation>
+                                                               <xs:documentation>Хэш файла по которому можно узнать не менялось ли содержимое</xs:documentation>
+                                                            </xs:annotation>
+                                                         </xs:element>
+                                                         <xs:element type="FuiType" name="Fui">
+                                                            <xs:annotation>
+                                                               <xs:documentation>Уникальный идентификатор файла в Сервисе Приема. По этому идентификатору можно получить файл в /api/file/get</xs:documentation>
+                                                            </xs:annotation>
+                                                         </xs:element>
+                                                      </xs:all>
+                                                   </xs:complexType>
+                                                </xs:element>
+                                                <xs:element type="BigIntType" name="IdTargetOrganization">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Идентификатор заказчика (из классификатора TargetOrganizationCls)</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                                <xs:element type="String50Type" name="TargetOfferNumber">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Номер предложения</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                                <xs:element type="String500Type" name="TargetOrganizationName">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Имя заказчика</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                                <xs:element type="xs:boolean" name="RvrPublished">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Опубликовано на ЕЦП "Работа в России"</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                                <xs:element type="Int4Type" name="IdWasInCareerEvents">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Поступающий принимал участие в профориентационных мероприятиях. Идентификатор классификатора TargetOfferParamsCls</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                                <xs:element type="Int4Type" name="IdCompetitionCivilService">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Конкурс на гос.службу пройден. Идентификатор классификатора TargetOfferParamsCls</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                                <xs:element type="Int4Type" name="IdWithoutMedicalIndications">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Нет мед.противопоказаний. Идентификатор классификатора TargetOfferParamsCls</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                                <xs:element type="Int4Type" name="IdStateSecret">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Есть доступ к гос.тайне. Идентификатор классификатора TargetOfferParamsCls</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                                <xs:element type="xs:positiveInteger" name="NumberPlaceOffer" minOccurs="0">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Количество мест в предложении</xs:documentation>
+                                                   </xs:annotation>
+                                                </xs:element>
+                                             </xs:sequence>
+                                          </xs:complexType>
+                                       </xs:element>
+                                    </xs:all>
+                                 </xs:complexType>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="SubjectList" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Список предметов, выбранных для сдачи</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element type="Int4Type" name="Id" minOccurs="1" maxOccurs="unbounded">
+                                 <xs:annotation>
+                                    <xs:documentation>Идентификатор классификатора SubjectCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="SpecialConditionList" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Список специальных условий сдачи ВИ</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element type="Int4Type" name="Id" maxOccurs="unbounded">
+                                 <xs:annotation>
+                                    <xs:documentation>Специальное условие. Идентификатор классификатора SpecialConditionsCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="RefuseEnrollment" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Отказ от зачисления</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:all>
+                              <xs:element type="BigIntType" name="IdCompetitiveGroup">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор КГ заявления (CompetitiveGroupList)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:dateTime" name="DateTime" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Дата и время изъявления желания отказа от зачисления после включения в приказ о зачислении. Формат RFC3339 шаблон "2006-01-02T15:04:05+03:00". Значение только по московскому времени</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:all>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="SourceType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Oovo" />
+         <xs:enumeration value="Epgu" />
+         <xs:enumeration value="SSPVO" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="KppType">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="9" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="OgrnType">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="13" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="FileHashType">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="32" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="FuiType">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="70" />
+         <xs:minLength value="55" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String50Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="50" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String500Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="500" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,40 @@
+{
+   "description": "Список специальностей в заявлениях (сущность)",
+   "type": "object",
+   "additionalProperties": {
+      "type": "null"
+   },
+   "properties": {
+      "spo_application_specialty_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 1,
+         "items": {
+            "type": "object",
+            "additionalProperties": {
+               "type": "null"
+            },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               }
+            },
+            "required": [
+               "id_object"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_application_specialty_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 9223372036854776000
+      }
+   }
+}

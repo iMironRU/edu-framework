@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="LkCompetitiveGroupBenefit">
+               <xs:annotation>
+                  <xs:documentation>Учет особых прав, внесенный оператором вуза через ЛК Сервиса приема</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:all>
+                     <xs:element type="BigIntType" name="IdCompetitiveGroup">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор КГ заявления (CompetitiveGroupList)</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="BigIntType" name="IdDocument">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор документа (DocumentList)</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="Int4Type" name="IdBenefitState">
+                        <xs:annotation>
+                           <xs:documentation>Состояние заявленного права. Идентификатор классификатора BenefitStateCls</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="Int4Type" name="IdBenefit">
+                        <xs:annotation>
+                           <xs:documentation>Идентификатор льготы. Идентификатор классификатора BenefitCls</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element name="Ege100List" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Вступительные испытания, в которых записать результат ЕГЭ = 100 баллов в результате применения данного особого права</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element type="BigIntType" name="IdEntranceTest" maxOccurs="unbounded">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор вступительного испытания (EntranceTestList)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:all>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,136 @@
+{
+   "description": "Конкурсный список (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "ranked_competition": {
+         "type": "object",
+         "additionalProperties": { "type": "null" },
+         "properties": {
+            "id_specialty": {
+               "$ref": "#/definitions/int8",
+               "description": "Уникальный идентификатор специальности (сущность spo_specialty_list)"
+            },
+            "created": {
+               "type": "string",
+               "format": "date-time",
+               "description": "Дата и время формирования КС организацией. В формате '2022-02-02T09:00:00+03:00'. Всегда по московскому времени"
+            },
+            "entrant_list": {
+               "type": "array",
+               "uniqueItems": true,
+               "items": {
+                  "type": "object",
+                  "additionalProperties": { "type": "null" },
+                  "properties": {
+                     "id_entrant": {
+                        "$ref": "#/definitions/int8",
+                        "description": "Уникальный идентификатор профиля поступающего (spo_entrant_list) сгенерированный Сервисом приема"
+                     },
+                     "list_number": {
+                        "$ref": "#/definitions/int4",
+                        "description": "Позиция в списке (Обязательно: от 1 до кол-ва заявлений)"
+                     },
+                     "average_mark": {
+                        "$ref": "#/definitions/score_type",
+                        "description": "Средний балл"
+                     },
+                     "marks_for_personal_achievements": {
+                        "$ref": "#/definitions/score_type",
+                        "description": "Баллы за индивидуальные достижения"
+                     },
+                     "marks_for_extra_tests": {
+                        "$ref": "#/definitions/score_type",
+                        "description": "Баллы за вступительные испытания"
+                     },
+                     "max_mark_for_extra_tests": {
+                        "$ref": "#/definitions/score_type",
+                        "description": "Максимальный балл за вступительные испытания"
+                     },
+                     "average_mark_for_extra_tests": {
+                        "$ref": "#/definitions/score_type",
+                        "description": "Средний балл за вступительные испытания"
+                     },
+                     "passed_extra_tests": {
+                        "type": "boolean",
+                        "description": "Сдал или не сдал вступительные испытания"
+                     },
+                     "sum_marks": {
+                        "$ref": "#/definitions/score_type",
+                        "description": "Сумма баллов"
+                     },
+                     "availability_of_originals": {
+                        "type": "boolean",
+                        "description": "Наличие оригиналов документов"
+                     },
+                     "date_originals": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Дата подачи оригиналов документов. Шаблон '2006-01-02'"
+                     }
+                  },
+                  "required": [
+                     "id_entrant",
+                     "list_number",
+                     "average_mark"
+                  ]
+               }
+            }
+         },
+         "required": [
+            "id_specialty",
+            "created"
+         ]
+      }
+   },
+   "required": [
+      "ranked_competition"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      },
+      "score_type": {
+         "type": "string",
+         "pattern": "^([0-9]|[1-9]\\d+)(|\\.\\d+)$",
+         "minLength": 1
+      },
+      "string255": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 255
+      },
+      "value5": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 5
+      },
+      "value1000": {
+         "type": "number",
+         "minimum": 0,
+         "maximum": 1000
+      },
+      "value10000": {
+         "type": "number",
+         "minimum": 0,
+         "maximum": 10000
+      },
+      "value8000": {
+         "type": "number",
+         "minimum": 0,
+         "maximum": 8000
+      },
+      "value999": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 999
+      }
+   }
+}

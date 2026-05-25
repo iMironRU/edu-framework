@@ -1,0 +1,60 @@
+{
+   "description": "Сроки приема (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "specialty_event_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_specialty": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Id специальности, сгенерированная Сервисом приема"
+               },
+               "reception_start": {
+                  "$ref": "#/definitions/datetime",
+                  "description": "Дата начала приема заявлений. Формат RFC3339 шаблон '2006-01-02T15:04:05+03:00'. Значение только по московскому времени"
+               },
+               "reception_end": {
+                  "$ref": "#/definitions/datetime",
+                  "description": "Дата окончания приема заявлений. Формат RFC3339 шаблон '2006-01-02T15:04:05+03:00'. Значение только по московскому времени"
+               },
+               "agreed_end": {
+                  "$ref": "#/definitions/datetime",
+                  "description": "Дата окончания приема согласий. Формат RFC3339 шаблон '2006-01-02T15:04:05+03:00'. Значение только по московскому времени"
+               }
+            },
+            "required": [
+               "id_object",
+               "id_specialty",
+               "reception_start",
+               "reception_end",
+               "agreed_end"
+            ]
+         }
+      }
+   },
+   "required": [
+      "specialty_event_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "datetime": {
+         "type": "string",
+         "format": "date-time"
+      }
+   }
+}

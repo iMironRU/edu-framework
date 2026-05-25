@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="OlympicDiplomaTypeCls" minOccurs="0" maxOccurs="unbounded">
+               <xs:annotation>
+                  <xs:documentation>Типы дипломов олимпиад</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element type="Int4Type" name="Id">
+                        <xs:annotation>
+                           <xs:documentation>Идентификатор</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:string" name="Name">
+                        <xs:annotation>
+                           <xs:documentation>Наименование</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:boolean" name="Actual">
+                        <xs:annotation>
+                           <xs:documentation>Признак актуальности</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

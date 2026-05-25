@@ -1,0 +1,203 @@
+{
+   "description": "Cписок профилей поступающих (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "id_jwt": {
+         "$ref": "#/definitions/int8",
+         "description": "Уникальный идентификатор запроса на обработку данных (токена)"
+      },
+      "entity_action": {
+         "$ref": "#/definitions/string50",
+         "description": "Имя сущности и действие над сущностью сконкатенированное через '.'. Например \"spo_сampaign_list.add\""
+      },
+      "stage": {
+         "type": "string",
+         "enum": [
+            "validate",
+            "business"
+         ],
+         "description": "Наименование стадии обработки, на которой завершилось выполнение токена"
+      },
+      "success_result_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "unique_code_profile": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код поступающего"
+               },
+               "id": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор поступающего"
+               },
+               "snils": {
+                  "$ref": "#/definitions/snils_type",
+                  "description": "СНИЛС"
+               },
+               "birthday": {
+                  "$ref": "#/definitions/string200",
+                  "format": "date",
+                  "description": "Дата рождения (2006-01-02)"
+               },
+               "surname": {
+                  "$ref": "#/definitions/string256",
+                  "description": "Фамилия"
+               },
+               "name": {
+                  "$ref": "#/definitions/string256",
+                  "description": "Имя"
+               },
+               "patronymic": {
+                  "$ref": "#/definitions/string256",
+                  "description": "Отчество"
+               }
+            },
+            "required": [
+               "id_object",
+               "unique_code_profile",
+               "id",
+               "birthday"
+            ]
+         }
+      },
+      "error_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "code": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код ошибки"
+               },
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках токена"
+               },
+               "description": {
+                  "$ref": "#/definitions/string350",
+                  "description": "Описание ошибки"
+               },
+               "params": {
+                  "type": [
+                     "array",
+                     "null"
+                  ],
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "key": {
+                           "$ref": "#/definitions/string50"
+                        },
+                        "value": {
+                           "$ref": "#/definitions/string350"
+                        }
+                     },
+                     "required": [
+                        "key",
+                        "value"
+                     ]
+                  }
+               },
+               "time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Время формирования ответа"
+               }
+            },
+            "required": [
+               "code",
+               "description",
+               "time"
+            ]
+         }
+      }
+   },
+   "required": [
+      "id_jwt",
+      "entity_action",
+      "stage"
+   ],
+   "definitions": {
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      },
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "stage_type": {
+         "type": "string",
+         "enum": [
+            "validate",
+            "business"
+         ]
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      },
+      "string256": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 256
+      },
+      "string300": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 300
+      },
+      "string350": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 350
+      },
+      "snils_type": {
+         "type": "string",
+         "pattern": "^\\d{11}$",
+         "description": "СНИЛС"
+      },
+      "param_type": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "Key": {
+                  "$ref": "#/definitions/string200"
+               },
+               "Value": {
+                  "$ref": "#/definitions/string300"
+               }
+            },
+            "required": [
+               "Key",
+               "Value"
+            ]
+         }
+      }
+   }
+}

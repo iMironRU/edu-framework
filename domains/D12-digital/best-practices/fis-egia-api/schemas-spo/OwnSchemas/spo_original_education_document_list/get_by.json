@@ -1,0 +1,42 @@
+{
+   "description": "Оригинал документа об образовании (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_original_education_document_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "description": "Список документов об образовании, подлинники которых поданы поступающим",
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_entrant": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор поступающего"
+               }
+            },
+            "required": [
+               "id_object",
+               "id_entrant"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_original_education_document_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      }
+   }
+}

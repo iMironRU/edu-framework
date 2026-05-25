@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="EntranceTestList">
+               <xs:annotation>
+                  <xs:documentation>Вступительные испытания (сущность)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="EntranceTest" minOccurs="1" maxOccurs="200">
+                        <xs:annotation>
+                           <xs:documentation>Объект</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:all>
+                              <xs:element type="BigIntType" name="IdObject">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках данного токена</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="UidType" name="Uid">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках организации сгенерированный организацией</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="IdCompetition">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор конкурса (CompetitionList)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdEntranceTestType">
+                                 <xs:annotation>
+                                    <xs:documentation>Идентификатор классификатора EntranceTestTypeCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdSubject">
+                                 <xs:annotation>
+                                    <xs:documentation>Идентификатор классификатора SubjectCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element name="MinScore">
+                                 <xs:annotation>
+                                    <xs:documentation>Минимальный балл</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:simpleType>
+                                    <xs:restriction base="xs:positiveInteger">
+                                       <xs:maxInclusive value="999" />
+                                    </xs:restriction>
+                                 </xs:simpleType>
+                              </xs:element>
+                              <xs:element name="MaxScore">
+                                 <xs:annotation>
+                                    <xs:documentation>Максимальный балл</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:simpleType>
+                                    <xs:restriction base="xs:positiveInteger">
+                                       <xs:maxInclusive value="1000" />
+                                    </xs:restriction>
+                                 </xs:simpleType>
+                              </xs:element>
+                              <xs:element name="LanguageList" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Список языков сдачи ВИ</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:complexType>
+                                    <xs:sequence>
+                                       <xs:element type="Int4Type" name="IdEntranceTestLanguage" maxOccurs="100">
+                                          <xs:annotation>
+                                             <xs:documentation>Язык сдачи ВИ. Идентификатор классификатора EntranceTestLanguageCls</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                    </xs:sequence>
+                                 </xs:complexType>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="Priority">
+                                 <xs:annotation>
+                                    <xs:documentation>Приоритет</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="UidType" name="UidReplaceEntranceTest" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Родительское ВИ. ВИ может ссылаться на другое ВИ другого типа (это называется соответствующее ВИ). ВИ может ссылаться на другое ВИ того же типа (это называется ООВИ с предметами по выбору). При этом приоритеты у этих ВИ (то, что ссылается, и то, на кого ссылаются) должны совпадать</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:all>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="UidType">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="36" />
+         <xs:minLength value="10" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="NoticeList">
+               <xs:annotation>
+                  <xs:documentation>Список уведомлений (сущность)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="Notice" minOccurs="1" maxOccurs="200">
+                        <xs:annotation>
+                           <xs:documentation>Объект</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element type="BigIntType" name="IdObject">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках данного токена</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="IdEntrant">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор поступающего, сгенерированный Сервисом приема</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:choice>
+                                 <xs:element name="RequestDocument">
+                                    <xs:annotation>
+                                       <xs:documentation>Уведомление о запросе нового документа</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:complexType>
+                                       <xs:all>
+                                          <xs:element type="Int4Type" name="IdNoticeType">
+                                             <xs:annotation>
+                                                <xs:documentation>Тип уведомления. Идентификатор классификатора NoticesTypeCls</xs:documentation>
+                                             </xs:annotation>
+                                          </xs:element>
+                                          <xs:element type="String500Type" name="Comment" minOccurs="0">
+                                             <xs:annotation>
+                                                <xs:documentation>Текстовое сообщение к уведомлению</xs:documentation>
+                                             </xs:annotation>
+                                          </xs:element>
+                                       </xs:all>
+                                    </xs:complexType>
+                                 </xs:element>
+                                 <xs:element type="String2000Type" name="RequestMessage">
+                                    <xs:annotation>
+                                       <xs:documentation>Сообщение для поступающего</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                              </xs:choice>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String500Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="500" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String2000Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="2000" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

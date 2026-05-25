@@ -1,0 +1,41 @@
+{
+   "type": "object",
+	"additionalProperties": { "type": "null" },
+   "properties": {
+      "oksm_cls": {
+         "type": "array",
+		   "uniqueItems": true,
+         "items": {
+            "type": "object",
+	         "additionalProperties": { "type": "null" },
+            "properties": {
+               "id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "Идентификатор"
+               },
+               "name": {
+                  "type": "string",
+                  "description": "Наименование"
+               },
+               "actual": {
+                  "type": "boolean",
+                  "description": "Признак актуальности"
+               },
+               "created_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Время создания"
+               }
+            },
+            "required": [
+               "id",
+               "name",
+               "actual",
+               "created_at"
+            ]
+         }
+      }
+   }
+}

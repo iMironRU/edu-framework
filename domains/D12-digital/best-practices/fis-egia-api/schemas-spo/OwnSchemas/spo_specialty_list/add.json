@@ -1,0 +1,196 @@
+{
+   "description": "Специальности - профессии (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_specialty_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "uid": {
+                  "$ref": "#/definitions/uid_type",
+                  "description": "Уникальный идентификатор объекта в рамках организации"
+               },
+               "id_campaign": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор Приемной кампании"
+               },
+               "id_direction": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Идентификатор классификатора direction_cls"
+               },
+               "id_education_level": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Идентификатор классификатора education_level_cls"
+               },
+               "id_education_form": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Идентификатор классификатора education_form_cls"
+               },
+               "id_payment_form": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Идентификатор классификатора payment_form_cls"
+               },
+               "number_places": {
+                  "$ref": "#/definitions/non_negative_int4",
+                  "description": "Количество мест"
+               },
+               "medical_certificate": {
+                  "type": "boolean",
+                  "description": "Необходимость расширенной медицинской справки"
+               },
+               "online_application": {
+                  "type": "boolean",
+                  "description": "Наличие приема на ЕПГУ"
+               },
+               "entrance_test_exists": {
+                  "type": "boolean",
+                  "description": "Наличие вступительных испытаний"
+               },
+               "term_study": {
+                  "$ref": "#/definitions/string255",
+                  "description": "Срок обучения"
+               },
+               "reception_start": {
+                  "$ref": "#/definitions/datetime",
+                  "description": "Дата начала приема заявлений. Формат RFC3339 шаблон '2006-01-02T15:04:05+03:00'. Значение только по московскому времени"
+               },
+               "reception_end": {
+                  "$ref": "#/definitions/datetime",
+                  "description": "Дата окончания приема заявлений. Формат RFC3339 шаблон '2006-01-02T15:04:05+03:00'. Значение только по московскому времени"
+               },
+               "agreed_end": {
+                  "$ref": "#/definitions/datetime",
+                  "description": "Дата окончания приема согласий. Формат RFC3339 шаблон '2006-01-02T15:04:05+03:00'. Значение только по московскому времени"
+               },
+               "comment": {
+                  "$ref": "#/definitions/string100",
+                  "description": "Комментарий"
+               },
+               "id_qualification": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Идентификатор квалификации. Справочник - qualifications_cls"
+               },
+               "education_program_name": {
+                  "$ref": "#/definitions/string500",
+                  "description": "Наименование образовательной программы"
+               },
+               "id_budget_level": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Идентификатор вида бюджета. Справочник - budget_levels_cls"
+               },
+               "in_demand": {
+                  "type": "boolean",
+                  "description": "Признак востребованной специальности"
+               },
+               "professionalism": {
+                  "type": "boolean",
+                  "description": "Профессионалитет"
+               },
+               "cost_of_study": {
+                  "$ref": "#/definitions/non_negative_int4",
+                  "description": "Стоимость обучения, руб. (Для бюджета 0)"
+               },
+               "avialability_of_accreditation": {
+                  "type": "boolean",
+                  "description": "Наличие аккредитации"
+               },
+               "passing_score": {
+                  "$ref": "#/definitions/non_negative_float4",
+                  "description": "Проходной бал прошлого года"
+               },
+               "subject_id_list": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                     "$ref": "#/definitions/int4",
+                     "description": "Идентификатор классификатора subject_cls"
+                  }
+               }
+            },
+            "required": [
+               "id_object",
+               "uid",
+               "id_campaign",
+               "id_direction",
+               "id_education_level",
+               "id_education_form",
+               "id_payment_form",
+               "number_places",
+               "medical_certificate",
+               "online_application",
+               "entrance_test_exists",
+               "term_study",
+               "reception_start",
+               "reception_end",
+               "agreed_end",
+               "id_qualification",
+               "in_demand",
+               "professionalism",
+               "cost_of_study",
+               "avialability_of_accreditation",
+               "passing_score"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_specialty_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      },
+      "non_negative_int4": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 2147483647
+      },
+      "non_negative_float4": {
+         "type": "number",
+         "minimum": 0,
+         "maximum": 2147483647
+      },
+      "uid_type": {
+         "type": "string",
+         "minLength": 10,
+         "maxLength": 36
+      },
+      "datetime": {
+         "type": "string",
+         "format": "date-time"
+      },
+      "string255": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 255
+      },
+      "string100": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 100
+      },
+      "string500": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 500
+      }
+   }
+}

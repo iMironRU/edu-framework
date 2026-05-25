@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="CompetitionList">
+               <xs:annotation>
+                  <xs:documentation>Конкурсы (сущность)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="Competition" minOccurs="1" maxOccurs="200">
+                        <xs:annotation>
+                           <xs:documentation>Объект</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:all>
+                              <xs:element type="BigIntType" name="IdObject">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках данного токена</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String13Type" name="OgrnOwnerOrganization">
+                                 <xs:annotation>
+                                    <xs:documentation>Огрн организации за которую заполняются данные (организация должна быть либо филиалом либо головной организацией)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String9Type" name="KppOwnerOrganization">
+                                 <xs:annotation>
+                                    <xs:documentation>Кпп организации за которую заполняются данные (организация должна быть либо филиалом либо головной организацией)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="UidType" name="Uid">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках организации сгенерированный организацией</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="IdCampaign">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор Приемной кампании (CampaignList) к которой относится данный объект</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdDirection">
+                                 <xs:annotation>
+                                    <xs:documentation>Идентификатор классификатора DirectionCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element name="OksoUgsnList" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>НП из состава УГСН</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:complexType>
+                                    <xs:sequence>
+                                       <xs:element type="Int4Type" name="IdDirection" minOccurs="1" maxOccurs="100">
+                                          <xs:annotation>
+                                             <xs:documentation>Идентификатор классификатора DirectionCls</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                    </xs:sequence>
+                                 </xs:complexType>
+                              </xs:element>
+                              <xs:element type="String1500Type" name="Comment" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Технический комментарий (для дополнительных сведений вуза)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdEducationLevel">
+                                 <xs:annotation>
+                                    <xs:documentation>Идентификатор классификатора EducationLevelCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdEducationForm">
+                                 <xs:annotation>
+                                    <xs:documentation>Идентификатор классификатора EducationFormCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdPlaceType">
+                                 <xs:annotation>
+                                    <xs:documentation>Идентификатор классификатора PlaceTypeCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdBudgetLevel"  minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Значение справочника BudgetLevelCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="NonNegativeInt4Type" name="NumberPlaces">
+                                 <xs:annotation>
+                                    <xs:documentation>Количество мест</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdStageAdmission">
+                                 <xs:annotation>
+                                    <xs:documentation>Этап приема. Идентификатор Классификатор StagesAdmissionCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="OnlyForForeigners">
+                                 <xs:annotation>
+                                    <xs:documentation>Признак «Только для иностранных граждан»</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="OnlyCitizensRF">
+                                 <xs:annotation>
+                                    <xs:documentation>Признак «Только для граждан РФ»</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="SecondEducationArts">
+                                 <xs:annotation>
+                                    <xs:documentation>Признак «Для поступающих на второе высшее образование в области искусств» (да/нет)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="PreviewTours">
+                                 <xs:annotation>
+                                    <xs:documentation>Признак «Наличие предварительных прослушиваний (туров)»</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="AttachingPortfolio">
+                                 <xs:annotation>
+                                    <xs:documentation>Признак «Необходимость прикрепления портфолио (творческих работ) к заявлению в виде файла»</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="MedicalExamination">
+                                 <xs:annotation>
+                                    <xs:documentation>Признак «Необходимость прохождения поступающими обязательного предварительного медицинского осмотра (обследования)"</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element name="CompetitionParamList" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Список доп параметров конкурса</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:complexType>
+                                    <xs:sequence>
+                                       <xs:element type="Int4Type" name="IdDictionaryValue" minOccurs="1" maxOccurs="unbounded">
+                                          <xs:annotation>
+                                             <xs:documentation>Id значения справочника DictionaryValueList. Все значения IdDictionaryValue в теге CompetitionParamList должны быть уникальны, иначе ошибка</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                    </xs:sequence>
+                                 </xs:complexType>
+                              </xs:element>
+                              <xs:element name="EducationalProgramList" minOccurs="1">
+                                 <xs:annotation>
+                                    <xs:documentation>Образовательные программы</xs:documentation>
+                                 </xs:annotation>
+                                    <xs:complexType>
+                                       <xs:sequence>
+                                          <xs:element type="BigIntType" name="IdEducationalProgram" minOccurs="1" maxOccurs="unbounded">
+                                             <xs:annotation>
+                                                <xs:documentation>Уникальный идентификатор Образовательной программы (EducationalProgramList). Все значения IdEducationalProgram в теге EducationalProgramList должны быть уникальны, иначе ошибка</xs:documentation>
+                                             </xs:annotation>
+                                          </xs:element>
+                                       </xs:sequence>
+                                    </xs:complexType>
+                              </xs:element>
+                              <xs:element name="TargetOrganizationList" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Целевые организации</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:complexType>
+                                    <xs:sequence>
+                                       <xs:element type="Int4Type" name="IdTargetOrganization" maxOccurs="unbounded">
+                                          <xs:annotation>
+                                             <xs:documentation>Id значения справочника TargetOrganizationCls. Все значения IdTargetOrganization в теге TargetOrganizationList должны быть уникальны, иначе ошибка</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                    </xs:sequence>
+                                 </xs:complexType>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="OnlyForVo">
+                                 <xs:annotation>
+                                    <xs:documentation>Только для ВО</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:boolean" name="OnlyForSpo">
+                                 <xs:annotation>
+                                    <xs:documentation>Только для СПО</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="NonNegativeInt4Type" name="CostOfStudyRf">
+                                 <xs:annotation>
+                                    <xs:documentation>Cтоимость обучения для граждан РФ (максимальная за первый год), руб</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="NonNegativeInt4Type" name="CostOfStudyForeigner">
+                                 <xs:annotation>
+                                    <xs:documentation>Cтоимость обучения для иностранных граждан (максимальная за первый год), руб</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:all>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="NonNegativeInt4Type">
+      <xs:restriction base="xs:nonNegativeInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="BigIntType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:maxInclusive value="9223372036854775807" />
+        </xs:restriction>
+    </xs:simpleType>
+   <xs:simpleType name="UidType">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="36" />
+         <xs:minLength value="10" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String9Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="9" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String13Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="13" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String1500Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="1500" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

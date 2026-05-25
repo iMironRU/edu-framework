@@ -1,0 +1,118 @@
+{
+   "type": "object",
+   "properties": {
+      "id_jwt": {
+         "$ref": "#/definitions/int8",
+         "description": "Уникальный идентификатор запроса на обработку данных (токена)"
+      },
+      "entity_action": {
+         "$ref": "#/definitions/string50",
+         "description": "Имя сущности и действие над сущностью сконкатенированное через '_'. Например 'Campaign_Add'"
+      },
+      "stage": {
+         "$ref": "#/definitions/stage_type",
+         "description": "Наименование стадии обработки на которой завершилось выполнение токена"
+      },
+      "success_result_list": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "properties": {
+               "id_object": {
+                  "type": "integer",
+                  "minimum": 1
+               }
+            },
+            "required": [
+               "id_object"
+            ]
+         }
+      },
+      "error_list": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "properties": {
+               "code": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код ошибки. Полный список кодов ошибок и их расшифровок смотрите в документации"
+               },
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена. Например, если в токене было передано три объекта, то каждому из них должен быть присвоен уникальный номер (IdObject), и тогда по каждому объекту вернется либо Success либо Error. При этом ответ по каждой отдельной сущности вернется только в случае успешно пройденной основной валидации"
+               },
+               "description": {
+                  "$ref": "#/definitions/string350",
+                  "description": "Описание кода ошибки"
+               },
+               "params": {
+                  "$ref": "#/definitions/param_type",
+                  "description": "Нестандартизированный параметр который раскрывает детали обработк"
+               },
+               "time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Время формирования ответа"
+               }
+            },
+            "required": [
+               "code",
+               "description",
+               "time"
+            ]
+         }
+      }
+   },
+   "required": [
+      "id_jwt",
+      "entity_action",
+      "stage"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      },
+      "string350": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 350
+      },
+      "stage_type": {
+         "type": "string",
+         "enum": [
+            "validate",
+            "business"
+         ]
+      },
+      "param_type": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "properties": {
+               "key": {
+                  "$ref": "#/definitions/string200"
+               },
+               "value": {
+                  "$ref": "#/definitions/string350"
+               }
+            },
+            "required": [
+               "key",
+               "value"
+            ]
+         }
+      }
+   }
+}

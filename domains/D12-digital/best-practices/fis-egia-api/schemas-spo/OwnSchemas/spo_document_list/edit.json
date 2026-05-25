@@ -1,0 +1,66 @@
+{
+   "description": "Документы заявления (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_document_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор"
+               },
+               "id": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор документа"
+               },
+               "id_check_status": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Идентификатор статуса документа"
+               }
+            },
+            "required": [
+               "id_object",
+               "id",
+               "id_check_status"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_document_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      },
+      "string256": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 256
+      }
+   }
+}

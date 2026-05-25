@@ -1,0 +1,66 @@
+{
+   "description": "Список заявлений поступающего (сущность)",
+  "type": "object",
+  "additionalProperties": { "type": "null" },
+  "properties": {
+     "spo_application_list": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 1,
+        "maxItems": 200,
+        "items": {
+           "type": "object",
+           "additionalProperties": { "type": "null" },
+           "properties": {
+              "id_object": {
+                 "$ref": "#/definitions/int8",
+                 "description": "Уникальный идентификатор объекта в рамках данного токена"
+              },
+              "id": {
+                 "$ref": "#/definitions/int8",
+                 "description": "Уникальный идентификатор заявления"
+              },
+              "need_hostel": {
+                 "type": "boolean",
+                 "description": "Признак необходимости общежития"
+              },
+              "special_condition_id_list": {
+                  "description": "Список специальных условий сдачи ВИ",
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/definitions/int4",
+                     "description": "Специальное условие. Идентификатор классификатора special_condition_cls"
+                  }
+              }
+           },
+           "required": [
+              "id_object",
+              "id",
+              "need_hostel"
+           ]
+        }
+     }
+  },
+  "required": [
+     "spo_application_list"
+  ],
+  "definitions": {
+     "int8": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 9223372036854775807
+     },
+     "int4": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 2147483647
+     },
+     "special_condition_type": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+           "$ref": "#/definitions/int4"
+        }
+     }
+  }
+}

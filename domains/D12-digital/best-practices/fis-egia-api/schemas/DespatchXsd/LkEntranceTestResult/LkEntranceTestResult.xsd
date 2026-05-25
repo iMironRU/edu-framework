@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="LkEntranceTestResult">
+               <xs:annotation>
+                  <xs:documentation>Результат ВИ, внесенное оператором вуза через ЛК Сервиса приема или добавленное Сервисом приема по результатам поиска ЕГЭ</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:all>
+                     <xs:element type="BigIntType" name="IdEntrant">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор профиля поступающего сгенерированный Сервисом приема</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="Int4Type" name="IdSubject">
+                        <xs:annotation>
+                           <xs:documentation>Предмет. Идентификатор классификатора SubjectCls</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element name="Ege" minOccurs="0">
+                        <xs:complexType>
+                           <xs:all>
+                              <xs:element name="ResultEge">
+                                 <xs:annotation>
+                                    <xs:documentation>Результат ЕГЭ</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:simpleType>
+                                    <xs:restriction base="xs:nonNegativeInteger">
+                                       <xs:maxInclusive value="100" />
+                                    </xs:restriction>
+                                 </xs:simpleType>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="IdDocument">
+                                 <xs:annotation>
+                                    <xs:documentation>Подтверждающий результат ЕГЭ документ. Уникальный идентификатор документа поступающего (DocumentList)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:all>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="ResultVvi" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Результат ВВИ (до трех знаков после запятой)</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                           <xs:restriction base="xs:float">
+                              <xs:minInclusive value="0" />
+                              <xs:maxInclusive value="100" />
+                           </xs:restriction>
+                        </xs:simpleType>
+                     </xs:element>
+                     <xs:element type="Int4Type" name="IdDictionaryValueSport" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Вид спорта. Уникальный идентификатор справочника вуза (DictionaryValueList)</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="Int4Type" name="IdStageAdmission">
+                        <xs:annotation>
+                           <xs:documentation>Этап приема. Идентификатор классификатора StagesAdmissionCls</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element  type="Int4Type" name="IdEducationLevelGroup">
+                        <xs:annotation>
+                           <xs:documentation>Группа уровней образования. Идентификатор справочника EducationLevelGroupCls</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                  </xs:all>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

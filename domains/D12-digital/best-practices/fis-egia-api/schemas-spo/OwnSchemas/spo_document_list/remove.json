@@ -1,0 +1,41 @@
+{
+   "description": "Документы заявления (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_document_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор"
+               },
+               "id": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор документа"
+               }
+            },
+            "required": [
+               "id_object",
+               "id"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_document_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      }
+   }
+}

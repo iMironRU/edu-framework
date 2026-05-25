@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="PersonProfileChange">
+               <xs:annotation>
+                  <xs:documentation>Изменения данных профиля поступающего (в т.ч. документы)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element type="BigIntType" name="IdEntrant">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор профиля поступающего сгенерированный Сервисом приема</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:choice>
+                        <xs:element type="BigIntType" name="UniqueCodeProfile">
+                           <xs:annotation>
+                              <xs:documentation>Уникальный код поступающего (для формирования конкурсных списков и списков поступающих)</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                        <xs:element name="UniqueCodeProfileChanged">
+                           <xs:annotation>
+                              <xs:documentation>Произошла смена уникального кода поступающего</xs:documentation>
+                           </xs:annotation>
+                           <xs:complexType>
+                              <xs:all>
+                                 <xs:element type="BigIntType" name="UniqueCodeProfile">
+                                    <xs:annotation>
+                                       <xs:documentation>Новый присвоенный уникальный код поступающего (для формирования конкурсных списков и списков поступающих)</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element type="xs:dateTime" name="UpdatedAt">
+                                    <xs:annotation>
+                                       <xs:documentation>Время смены уникального кода поступающего. Формат RFC3339 шаблон "2006-01-02T15:04:05+03:00". Значение только по московскому времени</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="ConsentList" minOccurs="0">
+                                    <xs:annotation>
+                                       <xs:documentation>Список согласий поступающего</xs:documentation>
+                                    </xs:annotation>
+                                       <xs:complexType>
+                                          <xs:sequence>
+                                          <xs:element name="Consent" minOccurs="0" maxOccurs="unbounded">
+                                          <xs:annotation>
+                                             <xs:documentation>Согласие</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:complexType>
+                                             <xs:all>
+                                             <xs:element type="xs:boolean" name="Agree">
+                                                <xs:annotation>
+                                                   <xs:documentation>Согласие подано (TRUE) или отозвано (FALSE)</xs:documentation>
+                                                </xs:annotation>
+                                             </xs:element>
+                                             <xs:element type="String500Type" name="NameOrganization" minOccurs="0">
+                                                <xs:annotation>
+                                                   <xs:documentation>Наименование вуза, в который подано согласие. Если не возвращается, значит согласие в вуз не подано</xs:documentation>
+                                                </xs:annotation>
+                                             </xs:element>
+                                             <xs:element type="xs:boolean" name="IsYourOrganization" minOccurs="0">
+                                                <xs:annotation>
+                                                   <xs:documentation>Признак подачи в ваш вуз (TRUE - ваш вуз, FALSE - другой вуз, Отсутствие тэга - согласие не подано или отозвано)</xs:documentation>
+                                                </xs:annotation>
+                                             </xs:element>
+                                             <xs:element type="xs:dateTime" name="AgreeDate">
+                                                <xs:annotation>
+                                                   <xs:documentation>Дата подачи/отзыва согласия. Шаблон "2006-01-02T15:04:05+03:00". Значение только по московскому времени</xs:documentation>
+                                                </xs:annotation>
+                                             </xs:element>
+                                             <xs:element type="Int4Type" name="IdEducationLevelGroup">
+                                                <xs:annotation>
+                                                   <xs:documentation>Группа уровней образования. Идентификатор классификатора EducationLevelGroupCls</xs:documentation>
+                                                </xs:annotation>
+                                             </xs:element>
+                                             <xs:element type="xs:boolean" name="IsOnline">
+                                                <xs:annotation>
+                                                   <xs:documentation>Способ подачи / отзыва согласия (TRUE - через ЕПГУ, FALSE - через ВУЗ)</xs:documentation>
+                                                </xs:annotation>
+                                             </xs:element>
+                                              </xs:all>
+                                             </xs:complexType>
+                                          </xs:element>
+                                       </xs:sequence>
+                                    </xs:complexType>
+                                 </xs:element>
+                              </xs:all>
+                           </xs:complexType>
+                        </xs:element>
+                     </xs:choice>
+                     <xs:element type="xs:date" name="Birthdate" minOccurs="0"> 
+                        <xs:annotation>
+                           <xs:documentation>Дата рождения поступающего (не передается если нет изменений), в формате "2022-02-02"</xs:documentation> 
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="String1024Type" name="Birthplace" minOccurs="0"> 
+                        <xs:annotation>
+                           <xs:documentation>Место рождения поступающего (не передается если нет изменений)</xs:documentation> 
+                        </xs:annotation> 
+                     </xs:element>
+                     <xs:element type="Int2Type" name="IdGender" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Пол поступающего (не передается если нет изменений)</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element name="AddressList" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Список адресов поступающего</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element name="Address" minOccurs="1" maxOccurs="unbounded">
+                                 <xs:annotation>
+                                    <xs:documentation>Адрес</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:complexType>
+                                    <xs:all>
+                                       <xs:element type="xs:boolean" name="IsRegistration">
+                                          <xs:annotation>
+                                             <xs:documentation>Является ли данный адрес регистрацией поступающего</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element type="String1024Type" name="FullAddr">
+                                          <xs:annotation>
+                                             <xs:documentation>Полный адрес</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element type="Int4Type" name="IdRegion">
+                                          <xs:annotation>
+                                             <xs:documentation>Идентификатор классификатора RegionCls</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element type="String255Type" name="City">
+                                          <xs:annotation>
+                                             <xs:documentation>Населенный пункт</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element type="Int4Type" name="IdOksm">
+                                          <xs:annotation>
+                                             <xs:documentation>Страна. Идентификатор классификатора OksmCls</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                    </xs:all>
+                                 </xs:complexType>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element type="String256Type" name="Email" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Адрес электронной почты поступающего (не передается если нет изменений)</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="String256Type" name="Phone" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Номер телефона поступающего (не передается если нет изменений)</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="FuiType" name="PhotoFui" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор файла в Сервисе Приема (фото поступающего, заменить предыдущее фото). По этому идентификатору можно получить файл в /api/file/get</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="Int4Type" name="IdFreeEducationReason" minOccurs="0">
+                        <xs:annotation> 
+                           <xs:documentation>Основания для получения бесплатного образования (для иностранца). Идентификатор классификатора FreeEducationReasonCls (не передается если нет изменений)</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element name="BaseEducationList" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Базовое образование указанное на ЕПГУ (не передается если нет изменений)</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element name="Id" type="Int4Type" maxOccurs="unbounded">
+                                 <xs:annotation>
+                                    <xs:documentation>Базовое образование. Идентификатор справочника BaseEducationCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="ForeignerEntrantInfo" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Данные иностранного абитуриента</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:all>
+                              <xs:element type="String256Type" name="Surname" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Фамилия на латинице (требуется для визы и приглашения)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String256Type" name="Name" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Имя на латинице (требуется для визы и приглашения)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdCitizenShipCountry" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Гражданство. Идентификатор классификатора OksmCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdInviteCountry" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Страна получения визы (для оформления приглашения на обучение). Идентификатор классификатора OksmCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String256Type" name="InviteCity" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Город получения визы (для оформления приглашения на обучение)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String256Type" name="InviteAddress" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Адрес для оформления приглашения на обучение</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="IdRecruter" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Информация о сотрудничестве с «рекрутером». Идентификатор классификатора RecruterCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:all>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Int2Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="32767" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String255Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="255" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String256Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="256" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String500Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="500" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String1024Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="1024" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="FuiType">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="70" />
+         <xs:minLength value="55" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

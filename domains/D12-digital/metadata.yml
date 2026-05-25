@@ -1,0 +1,65 @@
+id: D12
+title: Цифровая инфраструктура и интеграции
+slug: D12-digital
+cluster: support
+version: 0.1.0
+status: draft
+
+applicability:
+  vuz: required
+  spo: required
+  do: partial
+  dpo: partial
+  aspirantura: required
+
+typical_owner: Отдел информационных технологий / ЦОС
+last_reviewed: 2026-05-25
+review_cycle_months: 6
+
+short_title: Цифра и интеграции
+
+depends_on:
+  - D01
+  - D05
+
+related_to:
+  - D03
+  - D04
+  - D07
+  - D13
+
+regulatory_refs:
+  - "ФЗ-149 от 27.07.2006 — об информации, информационных технологиях и о защите информации"
+  - "ФЗ-152 от 27.07.2006 — о персональных данных"
+  - "ФЗ-63 от 06.04.2011 — об электронной подписи"
+  - "Приказ Минобрнауки № 821 от 27.11.2024 — Порядок приёма на ВО (требования к ИС)"
+  - "ПП РФ № 555 от 26.04.2019 — суперсервис «Поступление в вуз онлайн»"
+
+gis_integrations:
+  - ФИС ГИА и Приём (Сервис приёма ВО и СПО)
+  - Суперсервис «Поступление в вуз онлайн»
+  - ЕСИА / Госуслуги
+  - ФИС ФРД
+  - ФГИС «Контингент»
+  - ФИС «Моя школа»
+
+cds_tag: true
+
+packs:
+  - vuz-base
+  - spo-base
+  - admission
+
+tags:
+  - digital
+  - integration
+  - fis-egia
+  - api
+  - superservice
+
+applicability_notes: |
+  ДО и ДПО — частичная применимость: интеграция с ФИС ГИА не требуется,
+  но интеграция с ЕСИА, ФИС ФРД и управление ЭП обязательны.
+
+authors:
+  - iMironRU

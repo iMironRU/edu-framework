@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="PaidContract">
+               <xs:annotation>
+                  <xs:documentation>Проект платного договора/ доп.соглашения к договору (сущность)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:all>
+                     <xs:element type="BigIntType" name="IdObject">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор объекта в рамках данного токена</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="BigIntType" name="IdCompetitiveGroup">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор КГ заявления (CompetitiveGroupList) сгенерированный Сервисом приема</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="FileType" name="Document">
+                        <xs:annotation>
+                           <xs:documentation>Договор/доп.соглашение. Файл (pdf) закодированный в base64. Доп.соглашение можно отправить только если подписан договор</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="FileType" name="Signature">
+                        <xs:annotation>
+                           <xs:documentation>Подпись вуза. Файл (sig) закодированный в base64</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                  </xs:all>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="FileType">
+      <xs:annotation>
+         <xs:documentation>Описание файлов</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="Base64" type="FileBodyType">
+            <xs:annotation>
+               <xs:documentation>Тело файла закодированное в base64</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="Extension" type="String20Type">
+            <xs:annotation>
+               <xs:documentation>Расширение файла без точки (НЕ mime-type). Пример jpg, pdf, zip, doc, sig...</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="Description" type="String256Type">
+            <xs:annotation>
+               <xs:documentation>Наименование файла</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="FileBodyType">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="50" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String20Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="20" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String256Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="256" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

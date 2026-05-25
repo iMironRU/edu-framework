@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="LkEntrantPriority">
+               <xs:annotation>
+                  <xs:documentation>Приоритеты абитуриента, внесенные оператором вуза через ЛК Сервиса приема</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:all>
+                     <xs:element type="BigIntType" name="IdEntrant">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор профиля поступающего сгенерированный Сервисом приема</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="BigIntType" name="IdApplication">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор заявления сгенерированный Сервисом приема</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element name="CompetitiveGroupPriorityList">
+                        <xs:annotation>
+                           <xs:documentation>Список приоритетов + КГ</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element name="CompetitiveGroupPriority" minOccurs="1" maxOccurs="500">
+                                 <xs:annotation>
+                                    <xs:documentation>Приоритет + КГ</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:complexType>
+                                    <xs:all>
+                                       <xs:element type="BigIntType" name="IdCompetitiveGroup">
+                                          <xs:annotation>
+                                             <xs:documentation>Уникальный идентификатор КГ заявления (CompetitiveGroupList)</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                       <xs:element name="Priority">
+                                          <xs:annotation>
+                                             <xs:documentation>Приоритет КГ заявления</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:complexType>
+                                             <xs:choice>
+                                                <xs:element name="PriorityTarget">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Приоритет целевой квоты</xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:simpleType>
+                                                      <xs:restriction base="xs:positiveInteger">
+                                                         <xs:maxInclusive value="300" />
+                                                      </xs:restriction>
+                                                   </xs:simpleType>
+                                                </xs:element>
+                                                <xs:element name="PriorityOther">
+                                                   <xs:annotation>
+                                                      <xs:documentation>Приоритет иных мест</xs:documentation>
+                                                   </xs:annotation>
+                                                   <xs:simpleType>
+                                                      <xs:restriction base="xs:positiveInteger">
+                                                         <xs:maxInclusive value="300" />
+                                                      </xs:restriction>
+                                                   </xs:simpleType>
+                                                </xs:element>
+                                             </xs:choice>
+                                          </xs:complexType>
+                                       </xs:element>
+                                    </xs:all>
+                                 </xs:complexType>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:all>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

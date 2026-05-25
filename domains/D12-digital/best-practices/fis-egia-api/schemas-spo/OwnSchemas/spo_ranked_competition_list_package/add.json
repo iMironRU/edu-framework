@@ -1,0 +1,40 @@
+{
+   "description": "Пакет конкурсного списка (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "ranked_competition_list_package": {
+         "type": "object",
+         "additionalProperties": { "type": "null" },
+         "properties": {
+            "id_object": {
+               "$ref": "#/definitions/int8",
+               "description": "Уникальный идентификатор объекта в рамках данного токена"
+            },
+            "embeded_package_body": {
+               "type": "object",
+               "description": "Встроенный json объект соответствующий package_body_file.json (нет кодировки в base64)"
+            },
+            "id_specialty": {
+               "$ref": "#/definitions/int8",
+               "description": "Уникальный идентификатор специальности"
+            }
+         },
+         "required": [
+            "id_object",
+            "id_specialty",
+            "embeded_package_body"
+         ]
+      }
+   },
+   "required": [
+      "ranked_competition_list_package"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      }
+   }
+}

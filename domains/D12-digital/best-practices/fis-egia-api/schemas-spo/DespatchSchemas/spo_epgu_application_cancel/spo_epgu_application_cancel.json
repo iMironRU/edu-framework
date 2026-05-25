@@ -1,0 +1,44 @@
+{
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+     "spo_epgu_application_cancel": {
+       "type": "object",
+       "additionalProperties": { "type": "null" },
+       "properties": {
+         "id_application": {
+           "$ref": "#/definitions/int8",
+           "description": "Уникальный идентификатор заявления"
+         },
+         "cancel_date": {
+           "type": "string",
+           "format": "date-time",
+           "description": "Дата отзыва заявления"
+         },
+         "reason": {
+           "$ref": "#/definitions/string1024",
+           "description": "Причина"
+         }
+       },
+       "required": [
+         "id_application",
+         "cancel_date"
+       ]
+     }
+   },
+   "required": [
+     "spo_epgu_application_cancel"
+   ],
+   "definitions": {
+     "int8": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 9223372036854775807
+     },
+     "string1024": {
+       "type": "string",
+       "minLength": 1,
+       "maxLength": 1024
+     }
+   }
+ }

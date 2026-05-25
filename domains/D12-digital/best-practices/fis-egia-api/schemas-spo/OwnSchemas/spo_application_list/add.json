@@ -1,0 +1,290 @@
+{
+   "description": "Список заявлений поступающего (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_application_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_entrant": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор существующего абитуриента"
+               },
+               "add_entrant": {
+                  "type": "object",
+                  "additionalProperties": { "type": "null" },
+                  "properties": {
+                     "identification": {
+                        "type": "object",
+                        "additionalProperties": { "type": "null" },
+                        "properties": {
+                           "surname": {
+                              "$ref": "#/definitions/string256",
+                              "description": "Фамилия"
+                           },
+                           "name": {
+                              "$ref": "#/definitions/string256",
+                              "description": "Имя"
+                           },
+                           "patronymic": {
+                              "$ref": "#/definitions/string256",
+                              "description": "Отчество"
+                           },
+                           "id_document_type": {
+                              "$ref": "#/definitions/int4",
+                              "description": "Тип документа"
+                           },
+                           "doc_series": {
+                              "$ref": "#/definitions/string50",
+                              "description": "Серия документа"
+                           },
+                           "doc_number": {
+                              "$ref": "#/definitions/string50",
+                              "description": "Номер документа"
+                           },
+                           "doc_organization": {
+                              "$ref": "#/definitions/string1024",
+                              "description": "Кем выдан документ"
+                           },
+                           "issue_date": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "Дата выдачи документа"
+                           },
+                           "subdivision_code": {
+                              "$ref": "#/definitions/string50",
+                              "description": "Код подразделения"
+                           }
+                        },
+                        "required": [
+                           "id_document_type"
+                        ]
+                     },
+                     "snils": {
+                        "$ref": "#/definitions/snils_type",
+                        "description": "СНИЛС"
+                     },
+                     "id_gender": {
+                        "$ref": "#/definitions/int2",
+                        "description": "Идентификатор пола классификатор gender_cls"
+                     },
+                     "birthday": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Дата рождения"
+                     },
+                     "birthplace": {
+                        "$ref": "#/definitions/string1024",
+                        "description": "Место рождения"
+                     },
+                     "phone": {
+                        "$ref": "#/definitions/string25",
+                        "description": "Контактный телефон"
+                     },
+                     "email": {
+                        "$ref": "#/definitions/string256",
+                        "description": "Электронная почта"
+                     },
+                     "id_free_education_reason": {
+                        "$ref": "#/definitions/int4",
+                        "description": "Основания для получения бесплатного образования (для иностранца). Идентификатор классификатора free_education_reasons_cls"
+                     },
+                     "address_list": {
+                        "type": "array",
+                        "items": {
+                           "type": "object",
+                           "additionalProperties": { "type": "null" },
+                           "properties": {
+                              "full_addr": {
+                                 "$ref": "#/definitions/string1024",
+                                 "description": "Полный адрес"
+                              },
+                              "id_region": {
+                                 "$ref": "#/definitions/int4",
+                                 "description": "Идентификатор региона"
+                              },
+                              "index": {
+                                 "$ref": "#/definitions/string6",
+                                 "description": "Почтовый индекс"
+                              },
+                              "is_registration": {
+                                 "type": "boolean",
+                                 "description": "Признак адреса регистрации"
+                              }
+                           },
+                           "required": [
+                              "full_addr",
+                              "id_region",
+                              "is_registration"
+                           ]
+                        },
+                        "minItems": 1,
+                        "description": "Список адресов"
+                     },
+                     "legal_representative_info": {
+                        "type": "object",
+                        "additionalProperties": { "type": "null" },
+                        "description": "Сведения о законном представителе",
+                        "properties": {
+                           "fio": {
+                              "$ref": "#/definitions/string500",
+                              "description": "ФИО представителя"
+                           },
+                           "phone": {
+                              "$ref": "#/definitions/string25",
+                              "description": "Телефон представителя"
+                           },
+                           "email": {
+                              "$ref": "#/definitions/string256",
+                              "description": "Email представителя"
+                           }
+                        },
+                        "required": [
+                           "fio",
+                           "phone"
+                        ]
+                     }
+                  },
+                  "required": [
+                     "identification",
+                     "id_gender",
+                     "birthday",
+                     "birthplace",
+                     "address_list"
+                  ]
+               },
+               "registration_date": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Дата регистрации заявления"
+               },
+               "first_time_spo": {
+                  "type": "boolean",
+                  "description": "Впервые в СПО"
+               },
+               "need_hostel": {
+                  "type": "boolean",
+                  "description": "Требуется общежитие"
+               },
+               "special_condition_id_list": {
+                  "description": "Список специальных условий сдачи ВИ",
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/definitions/int4",
+                     "description": "Специальное условие. Идентификатор классификатора special_condition_cls"
+                  }
+               },
+               "add_application_specialty_list": {
+                  "description": "Список специальностей - профессий",
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/definitions/int8",
+                     "description": "Уникальный идентификатор специальности (сущность spo_specialty_list)"
+                  },
+                  "minItems": 1
+               },
+               "benefit_id_list": {
+                  "description": "Список льгот (если не передается - считается как отсутствие льгот)",
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/definitions/int4",
+                     "description": "Льгота. Идентификатор классификатора benefit_cls"
+                  }
+               },
+               "achievement_id_list": {
+                  "description": "Список индивидуальных достижений (если не передается - считается как отсутствие достижений)",
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/definitions/int4",
+                     "description": "Индивидуальное достижение. Идентификатор классификатора achievement_cls"
+                  }
+               }
+            },
+            "required": [
+               "id_object",
+               "registration_date",
+               "first_time_spo",
+               "need_hostel",
+               "add_application_specialty_list"
+            ],
+            "oneOf": [
+               {
+                  "required": [
+                     "id_entrant"
+                  ]
+               },
+               {
+                  "required": [
+                     "add_entrant"
+                  ]
+               }
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_application_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      },
+      "int2": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 32767
+      },
+      "string6": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 6
+      },
+      "string25": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 25
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string256": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 256
+      },
+      "string500": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 500
+      },
+      "string1024": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 1024
+      },
+      "snils_type": {
+         "type": "string",
+         "pattern": "^\\d{11}$",
+         "description": "СНИЛС"
+      }
+   }
+}

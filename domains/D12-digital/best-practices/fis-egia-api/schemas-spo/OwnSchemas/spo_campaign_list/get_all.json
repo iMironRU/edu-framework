@@ -1,0 +1,38 @@
+{
+   "description": "Приемная кампания (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_campaign_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "description": "Приемная кампания (сущность)",
+         "minItems": 1,
+         "maxItems": 1,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "description": "Объект",
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8"
+               }
+            },
+            "required": [
+               "id_object"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_campaign_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807,
+         "description": "Уникальный идентификатор объекта в рамках данного токена"
+      }
+   }
+}

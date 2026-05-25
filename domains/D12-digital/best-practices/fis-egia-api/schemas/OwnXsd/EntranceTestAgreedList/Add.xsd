@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="EntranceTestAgreedList">
+               <xs:annotation>
+                  <xs:documentation>Список. Запись на сдачу ВИ (предмета) (сущность)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="EntranceTestAgreed" minOccurs="1" maxOccurs="200">
+                        <xs:annotation>
+                           <xs:documentation>Запись на сдачу вступительного испытания на бак/спец/БВО (объект)</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element type="BigIntType" name="IdObject">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках данного токена</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="IdEntrant">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор профиля поступающего сгенерированный Сервисом приема</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdSubject">
+                                 <xs:annotation>
+                                    <xs:documentation>Предмет (вступительное испытание). Идентификатор классификатора SubjectCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="IdEntranceTestPlace">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор даты сдачи (EntranceTestPlaceList)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdEntranceTestLanguage" minOccurs="0">
+                                 <xs:annotation>
+                                    <xs:documentation>Выбранный язык сдачи. Идентификатор классификатора EntranceTestLanguageCls. Если не указан, то считать, что выбран "русский язык"</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>
