@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="CompetitiveGroupAchievementList">
+               <xs:annotation>
+                  <xs:documentation>Индивидуальные достижения в рамках КГ заявлений (сущность)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="CompetitiveGroupAchievement" minOccurs="1" maxOccurs="200">
+                        <xs:annotation>
+                           <xs:documentation>Объект. Уникально идентифицируется полями IdCompetitiveGroup + IdDocument</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:all>
+                              <xs:element type="BigIntType" name="IdObject">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках данного токена</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="IdCompetitiveGroup">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор КГ заявления (CompetitiveGroupList)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="IdDocument">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор документа (DocumentList)</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdAchievementCategory">
+                                 <xs:annotation>
+                                    <xs:documentation>Категория индивидуального достижения. Идентификатор классификатора AchievementCategoryCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="NonNegativeInt1000Type" name="Mark">
+                                 <xs:annotation>
+                                    <xs:documentation>Балл</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:all>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="NonNegativeInt1000Type">
+      <xs:restriction base="xs:nonNegativeInteger">
+         <xs:maxInclusive value="1000" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,105 @@
+{
+   "description": "Документы удостоверяющие личность (ДУЛ) списком (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_entrant_identification_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор"
+               },
+               "id_entrant": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор поступающего"
+               },
+               "surname": {
+                  "$ref": "#/definitions/string256",
+                  "description": "Фамилия"
+               },
+               "name": {
+                  "$ref": "#/definitions/string256",
+                  "description": "Имя"
+               },
+               "patronymic": {
+                  "$ref": "#/definitions/string256",
+                  "description": "Отчество"
+               },
+               "doc_series": {
+                  "$ref": "#/definitions/string50",
+                  "description": "Серия паспорта"
+               },
+               "doc_number": {
+                  "$ref": "#/definitions/string50",
+                  "description": "Номер паспорта"
+               },
+               "issue_date": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Дата выдачи"
+               },
+               "doc_org": {
+                  "$ref": "#/definitions/string256",
+                  "description": "Организация, выдавшая документ"
+               },
+               "subdivison_code": {
+                  "$ref": "#/definitions/string50",
+                  "description": "Код подразделения"
+               },
+               "id_document_type": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Тип документа"
+               },
+               "is_current": {
+                  "type": "boolean",
+                  "description": "Установить как активный"
+               }
+            },
+            "required": [
+               "id_object",
+               "id_entrant",
+               "surname",
+               "name",
+               "doc_series",
+               "doc_number",
+               "issue_date",
+               "doc_org",
+               "id_document_type",
+               "is_current"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_entrant_identification_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 9223372036854775807
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      },
+      "string256": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 256
+      }
+   }
+}

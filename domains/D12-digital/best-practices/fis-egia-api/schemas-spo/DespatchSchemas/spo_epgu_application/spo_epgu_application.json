@@ -1,0 +1,484 @@
+{
+   "type":"object",
+   "additionalProperties":{ "type":"null" },
+   "properties":{
+      "spo_epgu_application":{
+         "type":"object",
+         "additionalProperties":{ "type":"null" },
+         "properties":{
+            "entrant":{
+               "type":"object",
+               "additionalProperties":{ "type":"null" },
+               "properties":{
+                  "id_entrant":{
+                     "$ref":"#/definitions/int8",
+                     "description":"Уникальный идентификатор абитуриента"
+                  },
+                  "unique_code_profile": {
+                     "$ref": "#/definitions/int8",
+                     "description": "Уникальный код поступающего"
+                  },
+                  "snils": {
+                     "$ref":"#/definitions/snils_type",
+                     "description":"Номер СНИЛС"
+                  },
+                  "id_gender":{
+                     "$ref":"#/definitions/int2",
+                     "description":"Идентификатор пола классификатор gender_cls"
+                  },
+                  "birthday":{
+                     "type":"string",
+                     "format":"date",
+                     "description":"Дата рождения"
+                  },
+                  "birthplace":{
+                     "$ref":"#/definitions/string1024",
+                     "description":"Место рождения"
+                  },
+                  "phone":{
+                     "$ref":"#/definitions/string_25_type",
+                     "description":"Номер телефона"
+                  },
+                  "email":{
+                     "$ref":"#/definitions/string256",
+                     "description":"Электронная почта"
+                  },
+                  "surname":{
+                     "$ref":"#/definitions/string256",
+                     "description":"Фамилия"
+                  },
+                  "name":{
+                     "$ref":"#/definitions/string256",
+                     "description":"Имя"
+                  },
+                  "patronymic":{
+                     "$ref":"#/definitions/string256",
+                     "description":"Отчество"
+                  },
+                  "id_free_education_reason":{
+                     "$ref":"#/definitions/int4",
+                     "description":"Идентификатор классификатор free_education_reason_cls"
+                  },
+                  "address_list":{
+                     "type":"array",
+                     "items":{
+                        "type":"object",
+                        "additionalProperties":{ "type":"null" },
+                        "properties":{
+                           "address":{
+                              "type":"object",
+                              "additionalProperties":{ "type":"null" },
+                              "properties":{
+                                 "full_addr":{
+                                    "$ref":"#/definitions/string1024",
+                                    "description":"Полный адрес"
+                                 },
+                                 "id_region":{
+                                    "$ref":"#/definitions/int4",
+                                    "description":"Идентификатор классификатора region_cls"
+                                 },
+                                 "index":{
+                                    "$ref":"#/definitions/string6",
+                                    "description":"Почтовый индекс"
+                                 }
+                              },
+                              "required":[
+                                 "full_addr",
+                                 "id_region"
+                              ]
+                           }
+                        },
+                        "required":[
+                           "address"
+                        ]
+                     }
+                  },
+                  "legal_representative_info":{
+                     "type":"object",
+                     "additionalProperties":{ "type":"null" },
+                     "properties":{
+                        "fio":{
+                           "$ref":"#/definitions/string500",
+                           "description":"ФИО представителя"
+                        },
+                        "phone":{
+                           "$ref":"#/definitions/string_25_type",
+                           "description":"Телефон представителя"
+                        },
+                        "email":{
+                           "$ref":"#/definitions/string256",
+                           "description":"Email представителя"
+                        }
+                     },
+                     "required":[
+                        "fio",
+                        "phone"
+                     ]
+                  },
+                  "identification":{
+                     "type":"object",
+                     "additionalProperties":{ "type":"null" },
+                     "properties":{
+                        "id_identification":{
+                           "$ref":"#/definitions/int8",
+                           "description":"Идентификатор документа"
+                        },
+                        "surname":{
+                           "$ref":"#/definitions/string256",
+                           "description":"Фамилия"
+                        },
+                        "name":{
+                           "$ref":"#/definitions/string256",
+                           "description":"Имя"
+                        },
+                        "patronymic":{
+                           "$ref":"#/definitions/string256",
+                           "description":"Отчество"
+                        },
+                        "series":{
+                           "$ref":"#/definitions/string50",
+                           "description":"Серия документа"
+                        },
+                        "number":{
+                           "$ref":"#/definitions/string50",
+                           "description":"Номер документа"
+                        },
+                        "issue_date":{
+                           "type":"string",
+                           "format":"date",
+                           "description":"Дата выдачи документа"
+                        },
+                        "doc_org":{
+                           "$ref":"#/definitions/string1024",
+                           "description":"Кем выдан"
+                        },
+                        "subdivision_code":{
+                           "$ref":"#/definitions/string50",
+                           "description":"Код подразделения"
+                        },
+                        "id_document_type":{
+                           "$ref":"#/definitions/int4",
+                           "description":"Тип документа"
+                        }
+                     },
+                     "required":[
+                        "series",
+                        "number",
+                        "issue_date",
+                        "doc_org",
+                        "id_document_type"
+                     ]
+                  },
+                  "photo":{
+                     "type":"object",
+                     "additionalProperties":{ "type":"null" },
+                     "properties":{
+                        "file_hash":{
+                           "$ref":"#/definitions/file_hash_type",
+                           "description":"Фото поступающего"
+                        },
+                        "fui":{
+                           "$ref":"#/definitions/fui_type",
+                           "description":"Уникальный идентификатор файла в Сервисе Приема. По этому идентификатору можно получить файл в /api/file/get"
+                        }
+                     },
+                     "required":[
+                        "file_hash",
+                        "fui"
+                     ]
+                  }
+               },
+               "required":[
+                  "id_entrant",
+                  "id_gender",
+                  "birthday",
+                  "birthplace",
+                  "surname",
+                  "name",
+                  "identification"
+               ]
+            },
+            "application":{
+               "type":"object",
+               "additionalProperties":{ "type":"null" },
+               "properties":{
+                  "id_application":{
+                     "$ref":"#/definitions/int8",
+                     "description":"Уникальный идентификатор заявления"
+                  },
+                  "registration_date":{
+                     "type":"string",
+                     "format":"date-time",
+                     "description":"Дата регистрации заявления"
+                  },
+                  "first_time_spo":{
+                     "type":"boolean",
+                     "description":"Впервые в СПО"
+                  },
+                  "need_hostel":{
+                     "type":"boolean",
+                     "description":"Требуется общежитие"
+                  },
+                  "special_condition_list":{
+                     "type":"array",
+                     "items":{
+                        "$ref":"#/definitions/int4",
+                        "description":"Список особых условий сдачи ВИ"
+                     }
+                  },
+                  "id_application_status":{
+                     "$ref":"#/definitions/int4",
+                     "description":"Идентификатор статуса заявления (классификатор application_status_cls)"
+                  },
+                  "application_specialty_list":{
+                     "type":"array",
+                     "description":"Список специальностей",
+                     "items":{
+                        "type":"object",
+                        "additionalProperties":{ "type":"null" },
+                        "properties":{
+                           "id_specialty":{
+                              "$ref":"#/definitions/int8",
+                              "description":"Уникальный идентификатор специальности"
+                           },
+                           "id_application_specialty_status":{
+                              "$ref":"#/definitions/int4",
+                              "description":"Статус специальности (классификатор application_specialty_status_cls)"
+                           }
+                        },
+                        "required":[
+                           "id_specialty",
+                           "id_application_specialty_status"
+                        ]
+                     }
+                  },
+                  "benefit_list":{
+                     "type":"array",
+                     "items":{
+                        "type":"object",
+                        "additionalProperties":{ "type":"null" },
+                        "properties":{
+                           "id_benefit":{
+                              "$ref":"#/definitions/int4",
+                              "description":"Идентификатор классификатора benefit_cls"
+                           },
+                           "file_list":{
+                              "type":"array",
+                              "items":{
+                                 "type":"object",
+                                 "additionalProperties":{ "type":"null" },
+                                 "properties":{
+                                    "fui":{
+                                       "$ref":"#/definitions/fui_type",
+                                       "description":"Уникальный идентификатор файла в Сервисе Приема. По этому идентификатору можно получить файл в /api/file/get"
+                                    },
+                                    "file_hash":{
+                                       "$ref":"#/definitions/file_hash_type",
+                                       "description":"Хэш файла"
+                                    }
+                                 },
+                                 "required":[
+                                    "fui",
+                                    "file_hash"
+                                 ]
+                              }
+                           }
+                        },
+                        "required":[
+                           "id_benefit"
+                        ]
+                     }
+                  },
+                  "achievement_list":{
+                     "type":"array",
+                     "description":"Список достижений",
+                     "items":{
+                        "type":"object",
+                        "additionalProperties":{ "type":"null" },
+                        "properties":{
+                           "id_achievement":{
+                              "$ref":"#/definitions/int4",
+                              "description":"Идентификатор классификатора achievement_cls"
+                           },
+                           "file_list":{
+                              "type":"array",
+                              "items":{
+                                 "type":"object",
+                                 "additionalProperties":{ "type":"null" },
+                                 "properties":{
+                                    "fui":{
+                                       "$ref":"#/definitions/fui_type",
+                                       "description":"Уникальный идентификатор файла в Сервисе Приема. По этому идентификатору можно получить файл в /api/file/get"
+                                    },
+                                    "file_hash":{
+                                       "$ref":"#/definitions/file_hash_type",
+                                       "description":"Хэш файла"
+                                    }
+                                 },
+                                 "required":[
+                                    "fui",
+                                    "file_hash"
+                                 ]
+                              }
+                           }
+                        },
+                        "required":[
+                           "id_achievement"
+                        ]
+                     }
+                  },
+                  "document_list":{
+                     "type":"array",
+                     "items":{
+                        "type":"object",
+                        "additionalProperties":{ "type":"null" },
+                        "properties":{
+                           "id_document":{
+                              "$ref":"#/definitions/int8",
+                              "description":"Уникальный идентификатор документа"
+                           },
+                           "file_list":{
+                              "type":"array",
+                              "items":{
+                                 "type":"object",
+                                 "additionalProperties":{ "type":"null" },
+                                 "properties":{
+                                    "fui":{
+                                       "$ref":"#/definitions/fui_type",
+                                       "description":"Уникальный идентификатор файла в Сервисе Приема. По этому идентификатору можно получить файл в /api/file/get"
+                                    },
+                                    "file_hash":{
+                                       "$ref":"#/definitions/file_hash_type",
+                                       "description":"Хэш файла"
+                                    }
+                                 },
+                                 "required":[
+                                    "fui",
+                                    "file_hash"
+                                 ]
+                              }
+                           },
+                           "id_document_type":{
+                              "$ref":"#/definitions/int4",
+                              "description":"Тип документа. Идентификатор классификатора document_type_cls"
+                           },
+                           "doc_series":{
+                              "$ref":"#/definitions/string256",
+                              "description":"Серия документа"
+                           },
+                           "doc_number":{
+                              "$ref":"#/definitions/string256",
+                              "description":"Номер документа"
+                           },
+                           "doc_organization":{
+                              "$ref":"#/definitions/string1024",
+                              "description":"Организация, выдавшая документ"
+                           },
+                           "issue_date":{
+                              "type":"string",
+                              "format":"date",
+                              "description":"Дата выдачи. Шаблон '2006-01-02'"
+                           },
+                           "id_check_status":{
+                              "$ref":"#/definitions/int4",
+                              "description":"Статус документа. Идентификатор классификатора documents_check_status_cls"
+                           },
+                           "created_date_time":{
+                              "type":"string",
+                              "format":"date-time",
+                              "description":"Время создания документа. Формат RFC3339 шаблон '2006-01-02T15:04:05+03:00'. Значение только по московскому времени"
+                           },
+                           "fields":{
+                              "type":"object",
+                              "description":"Реквизиты согласно document_type_cls"
+                           }
+                        },
+                        "required":[
+                           "id_document",
+                           "id_document_type",
+                           "created_date_time"
+                        ]
+                     }
+                  }
+               },
+               "required":[
+                  "id_application",
+                  "registration_date",
+                  "first_time_spo",
+                  "need_hostel",
+                  "id_application_status",
+                  "application_specialty_list"
+               ]
+            }
+         },
+         "required":[
+            "entrant",
+            "application"
+         ]
+      }
+   },
+   "required":[
+      "spo_epgu_application"
+   ],
+   "definitions":{
+      "int8":{
+         "type":"integer",
+         "minimum":0,
+         "maximum":9223372036854775807
+      },
+      "snils_type":{
+         "type":"string",
+         "pattern":"^\\d{11}$"
+      },
+      "int2":{
+         "type":"integer",
+         "minimum":0,
+         "maximum":32767
+      },
+      "int4":{
+         "type":"integer",
+         "minimum":0,
+         "maximum":2147483647
+      },
+      "string256":{
+         "type":"string",
+         "minLength":1,
+         "maxLength":256
+      },
+      "file_hash_type":{
+         "type":"string",
+         "minLength":1,
+         "maxLength":32
+      },
+      "fui_type":{
+         "type":"string",
+         "minLength":60,
+         "maxLength":62
+      },
+      "string6":{
+         "type":"string",
+         "minLength":1,
+         "maxLength":6
+      },
+      "string_25_type":{
+         "type":"string",
+         "minLength":1,
+         "maxLength":25
+      },
+      "string50":{
+         "type":"string",
+         "minLength":1,
+         "maxLength":50
+      },
+      "string500":{
+         "type":"string",
+         "minLength":1,
+         "maxLength":500
+      },
+      "string1024":{
+         "type":"string",
+         "minLength":1,
+         "maxLength":1024
+      }
+   }
+}

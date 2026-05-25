@@ -1,0 +1,72 @@
+{
+   "type":"object",
+   "additionalProperties":{ "type":"null" },
+   "properties":{
+      "spo_epgu_additional_information":{
+         "type":"object",
+         "additionalProperties":{ "type":"null" },
+         "properties":{
+            "id_application":{
+               "$ref":"#/definitions/int8",
+               "description":"Уникальный идентификатор заявления"
+            },
+            "comment":{
+               "$ref":"#/definitions/string1024",
+               "description":"Комментарий"
+            },
+            "file_list":{
+               "type":"array",
+               "uniqueItems":true,
+               "items":{
+                  "type":"object",
+                  "additionalProperties":{
+                     "type":"null"
+                  },
+                  "properties":{
+                     "fui":{
+                        "$ref":"#/definitions/fui_type",
+                        "description":"Уникальный идентификатор файла в Сервисе Приема. По этому идентификатору можно получить файл в /api/file/get"
+                     },
+                     "file_hash":{
+                        "$ref":"#/definitions/file_hash_type",
+                        "description":"Хэш файла"
+                     }
+                  },
+                  "required":[
+                     "fui",
+                     "file_hash"
+                  ]
+               }
+            }
+         },
+         "required":[
+            "id_application"
+         ]
+      }
+   },
+   "required":[
+      "spo_epgu_additional_information"
+   ],
+   "definitions":{
+      "fui_type":{
+         "type":"string",
+         "minLength":60,
+         "maxLength":62
+      },
+      "file_hash_type":{
+         "type":"string",
+         "minLength":1,
+         "maxLength":32
+      },
+      "string1024":{
+         "type":"string",
+         "minLength":1,
+         "maxLength":1024
+      },
+      "int8":{
+         "type":"integer",
+         "minimum":1,
+         "maximum":9223372036854775807
+      }
+   }
+}

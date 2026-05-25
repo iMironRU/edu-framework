@@ -1,0 +1,82 @@
+{
+   "description": "Документы заявления (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_document_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор заявления"
+               },
+               "doc_series": {
+                  "$ref": "#/definitions/string50",
+                  "description": "Серия"
+               },
+               "doc_number": {
+                  "$ref": "#/definitions/string50",
+                  "description": "Номер"
+               },
+               "issue_date": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Дата выдачи"
+               },
+               "doc_org": {
+                  "$ref": "#/definitions/string256",
+                  "description": "Организация, выдавшая документ"
+               },
+               "id_document_type": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Тип документа"
+               },
+               "fields": {
+                  "type": "object",
+                  "description": "Реквизиты согласно document_type_cls"
+               }
+            },
+            "required": [
+               "id_object",
+               "id_application",
+               "id_document_type"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_document_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string256": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 256
+      }
+   }
+}

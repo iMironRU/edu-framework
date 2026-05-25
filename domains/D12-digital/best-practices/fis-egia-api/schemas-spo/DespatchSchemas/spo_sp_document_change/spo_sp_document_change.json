@@ -1,0 +1,164 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "spo_sp_document_change": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "null"
+            },
+            "description": "Изменения документа (новый документ)",
+            "properties": {
+                "id_application": {
+                   "$ref": "#/definitions/int8",
+                   "description": "Уникальный идентификатор заявления"
+                },
+                "id_entrant": {
+                    "description": "Уникальный идентификатор профиля поступающего сгенерированный Сервисом приема",
+                    "$ref": "#/definitions/int8"
+                },
+                "id_document": {
+                    "description": "Уникальный идентификатор документа сгенерированный Сервисом приема",
+                    "$ref": "#/definitions/int8"
+                },
+                "id_document_type": {
+                    "$ref": "#/definitions/int4",
+                    "description": "Тип документа. Идентификатор классификатора document_type_cls"
+                },
+                "doc_series": {
+                    "$ref": "#/definitions/string20",
+                    "description": "Серия документа"
+                },
+                "doc_number": {
+                    "$ref": "#/definitions/string50",
+                    "description": "Номер документа"
+                },
+                "issue_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Дата выдачи. Шаблон \"2006-01-02\"",
+                    "nullable": true
+                },
+                "doc_organization": {
+                    "$ref": "#/definitions/string500",
+                    "description": "Организация, выдавшая документ"
+                },
+                "fields": {
+                    "type": "object",
+                    "description": "Реквизиты, в зависимости от типа документа"
+                },
+                "id_achievement_category": {
+                    "$ref": "#/definitions/int4",
+                    "description": "Категория индивидуального достижения. Идентификатор классификатора achievement_category_cls"
+                },
+                "id_check_status": {
+                    "$ref": "#/definitions/int4",
+                    "description": "Статус проверки документа. Идентификатор классификатора document_check_status_cls"
+                },
+                "file": {
+                    "type": "object",
+                    "properties": {
+                        "file_hash": {
+                            "$ref": "#/definitions/file_hash_type",
+                            "description": "Хэш файла по которому можно узнать не менялось ли содержимое"
+                        },
+                        "fui": {
+                            "$ref": "#/definitions/fui_type",
+                            "description": "Уникальный идентификатор файла в Сервисе Приема. По этому идентификатору можно получить файл в /api/file/get"
+                        }
+                    },
+                    "required": [
+                        "file_hash",
+                        "fui"
+                    ]
+                },
+                "created_date_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Время создания документа. Формат RFC3339 шаблон \"2006-01-02T15:04:05+03:00\". Значение только по московскому времени"
+                },
+                "updated_date_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Время последнего редактирования документа. Формат RFC3339 шаблон \"2006-01-02T15:04:05+03:00\". Значение только по московскому времени"
+                },
+                "source": {
+                    "$ref": "#/definitions/source_type",
+                    "description": "Источник создания документа"
+                }
+            },
+            "required": [
+                "id_entrant",
+                "id_document",
+                "id_document_type",
+                "id_check_status",
+                "created_date_time",
+                "updated_date_time",
+                "source"
+            ]
+        }
+    },
+    "required": [
+        "spo_sp_document_change"
+    ],
+    "definitions": {
+        "int8": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9223372036854775807
+        },
+        "int4": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+        },
+        "guidType": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 36
+        },
+        "source_type": {
+            "type": "string",
+            "enum": [
+                "Oovo",
+                "Epgu",
+                "SSPVO"
+            ]
+        },
+        "string20": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20
+        },
+        "string32": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32
+        },
+        "string50": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "string255": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+        },
+        "string500": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+        },
+        "file_hash_type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32
+        },
+        "fui_type": {
+            "type": "string",
+            "minLength": 60,
+            "maxLength": 62
+        }
+    }
+}

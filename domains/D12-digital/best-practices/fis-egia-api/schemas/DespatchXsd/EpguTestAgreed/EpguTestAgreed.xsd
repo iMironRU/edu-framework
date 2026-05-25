@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="EpguTestAgreed">
+               <xs:annotation>
+                  <xs:documentation>Запись (отказ от записи) на сдачу ВИ (с ЕПГУ)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element type="BigIntType" name="IdEntrant">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор профиля поступающего сгенерированный Сервисом приема</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="BigIntType" name="IdEntranceTestPlace">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор даты сдачи (EntranceTestPlaceList)</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="Int4Type" name="IdEntranceTestLanguage" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Выбранный язык сдачи. Идентификатор классификатора EntranceTestLanguageCls. Если не указан, то считать, что выбран "русский язык"</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:boolean" name="Agree">
+                        <xs:annotation>
+                           <xs:documentation>Признак записи на ВИ (TRUE - запись на ВИ, FALSE - отказ от записи)</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:dateTime" name="CreatedDateTime">
+                        <xs:annotation>
+                           <xs:documentation>Дата и время создания записи на ВИ. Формат RFC3339 шаблон "2006-01-02T15:04:05+03:00". Значение только по московскому времени</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:dateTime" name="UpdatedDateTime" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Дата и время последнего изменения записи на ВИ. Формат RFC3339 шаблон "2006-01-02T15:04:05+03:00". Значение только по московскому времени</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

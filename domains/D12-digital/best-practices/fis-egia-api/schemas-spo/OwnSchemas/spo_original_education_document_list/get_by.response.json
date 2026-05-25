@@ -1,0 +1,203 @@
+{
+    "description": "Оригинал документа об образовании (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+       "id_jwt": {
+           "type": "integer",
+           "description": "Уникальный идентификатор запроса на обработку данных (токена)"
+       },
+       "entity_action": {
+           "$ref": "#/definitions/string50",
+           "description": "Имя сущности и действие над сущностью сконкатенированное через '.'. Например \"spo_сampaign_list.add\""
+       },
+       "stage": {
+           "$ref": "#/definitions/stage_type",
+           "description": "Наименование стадии обработки на которой завершилось выполнение токена"
+       },
+       "success_result_list": {
+           "type": [ "array", "null" ],
+           "items": {
+               "type": "object",
+               "additionalProperties": { "type": "null" },
+               "properties": {
+                   "id_object": {
+                       "type": "integer",
+                       "description": "Уникальный идентификатор объекта в рамках данного токена"
+                   },
+                   "id_entrant": {
+                       "$ref": "#/definitions/int8",
+                       "description": "Уникальный идентификатор абитуриента"
+                   },
+                   "original_document_list": {
+                       "type": "array",
+                       "items": {
+                           "type": "object",
+                           "additionalProperties": { "type": "null" },
+                           "properties": {
+                               "id_application": {
+                                   "$ref": "#/definitions/int8",
+                                   "description": "Идентификатор заявления"
+                               },
+                               "id_specialty": {
+                                   "$ref": "#/definitions/int8",
+                                   "description": "Идентификатор специальности"
+                               },
+                               "created_at": {
+                                   "$ref": "#/definitions/datetime",
+                                   "description": "Дата записи"
+                               }
+                           },
+                           "required": [
+                               "id_application",
+                               "id_specialty"
+                           ]
+                       }
+                   }
+               },
+               "required": [
+                   "id_object",
+                   "id_entrant",
+                   "original_document_list"
+               ]
+           }
+       },
+       "error_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "code": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код ошибки"
+               },
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках токена"
+               },
+               "description": {
+                  "$ref": "#/definitions/string350",
+                  "description": "Описание ошибки"
+               },
+               "params": {
+                  "type": [
+                     "array",
+                     "null"
+                  ],
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "key": {
+                           "$ref": "#/definitions/string50"
+                        },
+                        "value": {
+                           "$ref": "#/definitions/string350"
+                        }
+                     },
+                     "required": [
+                        "key",
+                        "value"
+                     ]
+                  }
+               },
+               "time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Время формирования ответа"
+               }
+            },
+            "required": [
+               "code",
+               "description",
+               "time"
+            ]
+         }
+      }
+   },
+   "required": [
+       "id_jwt",
+       "entity_action",
+       "stage"
+   ],
+   "definitions": {
+       "int8": {
+           "type": "integer",
+           "minimum": 1,
+           "maximum": 9223372036854775807
+       },
+       "int4": {
+           "type": "integer",
+           "minimum": 0,
+           "maximum": 2147483647
+       },
+       "string9": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 9
+       },
+       "string13": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 13
+       },
+       "uid_type": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 36
+       },
+       "string50": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 50
+       },
+       "string200": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 200
+       },
+       "string256": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 256
+       },
+       "string350": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 350
+       },
+       "string500": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 500
+       },
+       "string_750": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 750
+       },
+       "string1024": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 1024
+       },
+       "stage_type": {
+           "type": "string",
+           "enum": [
+               "validate",
+               "business"
+           ]
+       },
+       "boolean": {
+           "type": "boolean"
+       },
+       "datetime": {
+           "type": "string",
+           "format": "date-time"
+       }
+   }
+}

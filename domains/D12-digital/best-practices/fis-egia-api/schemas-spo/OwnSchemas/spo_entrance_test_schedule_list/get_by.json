@@ -1,0 +1,56 @@
+{
+   "description": "Записи на ВИ которые назначены организацией для отправки на ЕПГУ (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_entrance_test_schedule_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления (сущность spo_application_list)"
+               },
+               "id_specialty": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор специальности (сущность spo_specialty_list)"
+               }
+            },
+            "required": [
+               "id_object",
+               "id_application",
+               "id_specialty"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_entrance_test_schedule_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 9223372036854775807
+      },
+      "string9": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 9
+      },
+      "string13": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 13
+      }
+   }
+}

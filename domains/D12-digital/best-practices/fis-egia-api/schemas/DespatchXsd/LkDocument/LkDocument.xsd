@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="LkDocument">
+               <xs:annotation>
+                  <xs:documentation>Документ, внесенный или измененный оператором вуза через ЛК Сервиса приема</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element type="BigIntType" name="IdDocument">
+                        <xs:annotation>
+                           <xs:documentation>Id документа</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="BigIntType" name="IdEntrant">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор профиля поступающего сгенерированный Сервисом приема</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="Int4Type" name="IdDocumentType">
+                        <xs:annotation>
+                           <xs:documentation>Тип документа. Идентификатор классификатора DocumentTypeCls</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="String256Type" name="DocName">
+                        <xs:annotation>
+                           <xs:documentation>Наименование документа</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="String256Type" name="DocSeries" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Серия документа</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="String256Type" name="DocNumber" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Номер документа</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:date" name="IssueDate" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Дата выдачи. Шаблон "2006-01-02"</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="String1000Type" name="DocOrganization" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Организация, выдавшая документ</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element name="Fields" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Реквизиты, в зависимости от типа документа</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:any maxOccurs="unbounded" namespace="##any" processContents="skip" />
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="Achievement" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Индивидуальное достижение</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element name="EducationLevelGroupList">
+                                 <xs:annotation>
+                                    <xs:documentation>Группы уровней образования (бак/спец/бво или маг/спец.во или аспирантура)</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:complexType>
+                                    <xs:sequence>
+                                       <xs:element type="Int4Type" name="Id" maxOccurs="unbounded">
+                                          <xs:annotation>
+                                             <xs:documentation>Группа уровней образования. Идентификатор справочника EducationLevelGroupCls</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                    </xs:sequence>
+                                 </xs:complexType>
+                              </xs:element>
+                              <xs:element name="IdAchievementCategory" type="Int4Type">
+                                 <xs:annotation>
+                                    <xs:documentation>Категория Индивидуального достижения. Идентификатор справочника AchievementCategoryCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element type="Int4Type" name="IdCheckStatus">
+                        <xs:annotation>
+                           <xs:documentation>Статус проверки документа. Идентификатор классификатора DocumentCheckStatusCls</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element name="File" minOccurs="0">
+                        <xs:complexType>
+                           <xs:all>
+                              <xs:element type="FileHashType" name="FileHash">
+                                 <xs:annotation>
+                                    <xs:documentation>Хэш файла по которому можно узнать не менялось ли содержимое</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="FuiType" name="Fui">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор файла в Сервисе Приема. По этому идентификатору можно получить файл в /api/file/get</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:all>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element type="xs:dateTime" name="CreatedDateTime">
+                        <xs:annotation>
+                           <xs:documentation>Время создания документа. Формат RFC3339 шаблон "2006-01-02T15:04:05+03:00". Значение только по московскому времени</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:dateTime" name="UpdatedDateTime">
+                        <xs:annotation>
+                           <xs:documentation>Время последнего редактирования документа. Формат RFC3339 шаблон "2006-01-02T15:04:05+03:00". Значение только по московскому времени</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="SourceType" name="Source">
+                        <xs:annotation>
+                           <xs:documentation>Источник создания документа</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="SourceType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Oovo" />
+         <xs:enumeration value="Epgu" />
+         <xs:enumeration value="SSPVO" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="FileHashType">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="32" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="FuiType">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="70" />
+         <xs:minLength value="55" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String256Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="256" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String1000Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="1000" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

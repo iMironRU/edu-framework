@@ -1,0 +1,55 @@
+{
+   "description": "Список индивидуальных достижений в рамках заявлений поступающего (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_application_achievement_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления"
+               },
+               "achievement_id_list": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "description": "Список достижений (если не передается - считается как отсутствие достижений)",
+                  "items": {
+                     "$ref": "#/definitions/int4",
+                     "description": "Достижение. Идентификатор классификатора achievement_cls"
+                  }
+               }
+            },
+            "required": [
+               "id_object",
+               "id_application"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_application_achievement_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      }
+   }
+}

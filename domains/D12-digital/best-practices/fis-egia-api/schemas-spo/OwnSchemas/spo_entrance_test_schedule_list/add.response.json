@@ -1,0 +1,141 @@
+{
+   "description": "Записи на ВИ которые назначены организацией для отправки на ЕПГУ (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "id_jwt": {
+         "type": "integer",
+         "description": "Уникальный идентификатор запроса на обработку данных (токена)"
+      },
+      "entity_action": {
+         "$ref": "#/definitions/string50",
+         "description": "Имя сущности и действие над сущностью сконкатенированное через '.'. Например \"spo_сampaign_list.add\""
+      },
+      "stage": {
+         "$ref": "#/definitions/stage_type",
+         "description": "Наименование стадии обработки на которой завершилось выполнение токена"
+      },
+      "success_result_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления (сущность spo_application_list)"
+               },
+               "id_specialty": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор специальности (сущность spo_specialty_list)"
+               },
+               "id": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор ВИ"
+               }
+            },
+            "required": [
+               "id_object",
+               "id"
+            ]
+         }
+      },
+      "error_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "code": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код ошибки"
+               },
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках токена"
+               },
+               "description": {
+                  "$ref": "#/definitions/string350",
+                  "description": "Описание ошибки"
+               },
+               "params": {
+                  "type": [
+                     "array",
+                     "null"
+                  ],
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "key": {
+                           "$ref": "#/definitions/string50"
+                        },
+                        "value": {
+                           "$ref": "#/definitions/string350"
+                        }
+                     },
+                     "required": [
+                        "key",
+                        "value"
+                     ]
+                  }
+               },
+               "time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Время формирования ответа"
+               }
+            },
+            "required": [
+               "code",
+               "description",
+               "time"
+            ]
+         }
+      }
+   },
+   "required": [
+      "id_jwt",
+      "entity_action",
+      "stage"
+   ],
+   "definitions": {
+      "stage_type": {
+         "type": "string",
+         "enum": [
+            "validate",
+            "business"
+         ]
+      },
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      },
+      "string350": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 350
+      }
+   }
+}

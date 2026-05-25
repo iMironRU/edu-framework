@@ -1,0 +1,327 @@
+{
+   "description": "Список заявлений поступающего (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "id_jwt": {
+         "$ref": "#/definitions/int8",
+         "description": "Уникальный идентификатор запроса на обработку данных (токена)"
+      },
+      "entity_action": {
+         "$ref": "#/definitions/string50",
+         "description": "Имя сущности и действие над сущностью сконкатенированное через '.'. Например \"spo_сampaign_list.add\")"
+      },
+      "stage": {
+         "$ref": "#/definitions/stage_type",
+         "description": "Наименование стадии обработки на которой завершилось выполнение токена"
+      },
+      "success_result_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления"
+               },
+               "id_entrant": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор профиля поступающего"
+               },
+               "unique_code_profile": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код поступающего"
+               },
+               "registration_date": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Дата регистрации по МСК"
+               },
+               "first_time_spo": {
+                  "type": "boolean",
+                  "description": "Признак получения среднего профессионального образования впервые"
+               },
+               "need_hostel": {
+                  "type": "boolean",
+                  "description": "Признак необходимости общежития"
+               },
+               "special_condition_id_list": {
+                  "description": "Список специальных условий сдачи ВИ",
+                  "type": "array",
+                  "items": {
+                     "$ref": "#/definitions/int4",
+                     "description": "Специальное условие. Идентификатор классификатора special_condition_cls"
+                  }
+               },
+               "id_application_status": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Статус заявления (классификатор application_status_cls)"
+               },
+               "application_specialty_list": {
+                  "description": "Список специальностей - профессий",
+                  "type": "array",
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "id_specialty": {
+                           "$ref": "#/definitions/int8",
+                           "description": "Уникальный идентификатор специальности"
+                        },
+                        "id_application_specialty_status": {
+                           "$ref": "#/definitions/int8",
+                           "description": "Статус специальности (классификатор application_specialty_status_cls)"
+                        },
+                        "status_comment": {
+                           "$ref": "#/definitions/string1024",
+                           "description": "Комментарий к статусу"
+                        }
+                     },
+                     "required": [
+                        "id_specialty",
+                        "id_application_specialty_status"
+                     ]
+                  }
+               },
+               "benefit_list": {
+                  "description": "Список льгот",
+                  "type": "array",
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "id_benefit": {
+                           "$ref": "#/definitions/int8",
+                           "description": "Льгота. Идентификатор классификатора benefit_cls"
+                        },
+                        "file_hash_list": {
+                           "description": "Список хэшей файлов",
+                           "type": "array",
+                           "items": {
+                              "$ref": "#/definitions/file_hash_type"
+                           }
+                        }
+                     },
+                     "required": [
+                        "id_benefit"
+                     ]
+                  }
+               },
+               "achievement_list": {
+                  "description": "Список индивидуальных достижений",
+                  "type": "array",
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "id_achievement": {
+                           "$ref": "#/definitions/int8",
+                           "description": "Индивидуальное достижение. Идентификатор классификатора achievement_cls"
+                        },
+                        "file_hash_list": {
+                           "description": "Список хэшей файлов",
+                           "type": "array",
+                           "items": {
+                              "$ref": "#/definitions/file_hash_type"
+                           }
+                        }
+                     },
+                     "required": [
+                        "id_achievement"
+                     ]
+                  }
+               },
+               "document_list": {
+                  "description": "Список документов абитуриента",
+                  "type": "array",
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "id_document": {
+                           "$ref": "#/definitions/int8",
+                           "description": "Уникальный идентификатор документа"
+                        },
+                        "file_hash_list": {
+                           "description": "Список хэшей файлов",
+                           "type": "array",
+                           "items": {
+                              "$ref": "#/definitions/file_hash_type"
+                           }
+                        },
+                        "id_document_type": {
+                           "$ref": "#/definitions/int8",
+                           "description": "Тип документа. Идентификатор классификатора document_type_cls"
+                        },
+                        "doc_series": {
+                           "$ref": "#/definitions/string256",
+                           "description": "Серия документа"
+                        },
+                        "doc_number": {
+                           "$ref": "#/definitions/string256",
+                           "description": "Номер документа"
+                        },
+                        "doc_org": {
+                           "$ref": "#/definitions/string1024",
+                           "description": "Организация, выдавшая документ"
+                        },
+                        "issue_date": {
+                           "type": "string",
+                           "format": "date",
+                           "description": "Дата выдачи. Шаблон '2006-01-02'"
+                        },
+                        "id_check_status": {
+                           "$ref": "#/definitions/int4",
+                           "description": "Статус документа. Идентификатор классификатора documents_check_status_cls"
+                        },
+                        "created_date_time": {
+                           "type": "string",
+                           "format": "date-time",
+                           "description": "Время создания документа. Формат RFC3339 шаблон '2006-01-02T15:04:05+03:00'. Значение только по московскому времени"
+                        },
+                        "fields": {
+                           "type": "object",
+                           "description": "Реквизиты согласно document_type_cls"
+                        }
+                     },
+                     "required": [
+                        "id_document",
+                        "id_document_type",
+                        "id_check_status",
+                        "created_date_time"
+                     ]
+                  }
+               }
+            },
+            "required": [
+               "id_object",
+               "id_application",
+               "id_entrant",
+               "registration_date",
+               "first_time_spo",
+               "need_hostel",
+               "id_application_status",
+               "application_specialty_list"
+            ]
+         }
+      },
+      "error_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "code": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код ошибки"
+               },
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках токена"
+               },
+               "description": {
+                  "$ref": "#/definitions/string350",
+                  "description": "Описание ошибки"
+               },
+               "params": {
+                  "type": [
+                     "array",
+                     "null"
+                  ],
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "key": {
+                           "$ref": "#/definitions/string50"
+                        },
+                        "value": {
+                           "$ref": "#/definitions/string350"
+                        }
+                     },
+                     "required": [
+                        "key",
+                        "value"
+                     ]
+                  }
+               },
+               "time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Время формирования ответа"
+               }
+            },
+            "required": [
+               "code",
+               "description",
+               "time"
+            ]
+         }
+      }
+   },
+   "required": [
+      "id_jwt",
+      "entity_action",
+      "stage"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "stage_type": {
+         "type": "string",
+         "enum": [
+            "validate",
+            "business"
+         ]
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string256": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 256
+      },
+      "string1024": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 1024
+      },
+      "string350": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 350
+      },
+      "file_hash_type": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 32
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      }
+   }
+}

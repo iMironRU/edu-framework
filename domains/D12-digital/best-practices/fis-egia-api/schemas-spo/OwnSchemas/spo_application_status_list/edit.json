@@ -1,0 +1,59 @@
+{
+   "description": "Изменение статусов заявлений списком (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_application_status_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 1000,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления"
+               },
+               "id_application_status": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Статус заявления"
+               },
+               "status_comment": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "description": "Комментарий к статусу"
+               }
+            },
+            "required": [
+               "id_object",
+               "id_application",
+               "id_application_status"
+            ]
+         }
+      }
+   },
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      },
+      "string1024": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 1024
+      }
+   }
+}

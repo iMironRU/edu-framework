@@ -1,0 +1,173 @@
+{
+   "description": "Запрос дополнительных сведений из ЕПГУ (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "id_jwt": {
+         "$ref": "#/definitions/int8",
+         "description": "Уникальный идентификатор запроса на обработку данных (токена)"
+      },
+      "entity_action": {
+         "$ref": "#/definitions/string50",
+         "description": "Имя сущности и действие над сущностью сконкатенированное через '.'. Например \"spo_сampaign_list.add\""
+      },
+      "stage": {
+         "$ref": "#/definitions/stage_type",
+         "description": "Наименование стадии обработки на которой завершилось выполнение токена"
+      },
+      "success_result_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "minItems": 1,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления (spo_application_list)"
+               },
+               "response_list": {
+                  "type": [
+                     "array",
+                     "null"
+                  ],
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "fui": {
+                           "$ref": "#/definitions/string1024",
+                           "description": "Уникальный идентификатор файла в Сервисе Приема"
+                        },
+                        "comment": {
+                           "$ref": "#/definitions/string1024",
+                           "description": "Комментарий"
+                        },
+                        "created_at": {
+                           "type": "string",
+                           "format": "date-time",
+                           "description": "Время получения сведений от ЕПГУ"
+                        }
+                     },
+                     "required": [
+                        "fui",
+                        "created_at"
+                     ]
+                  }
+               }
+            },
+            "required": [
+               "id_object",
+               "id_application"
+            ]
+         }
+      },
+      "error_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "code": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код ошибки"
+               },
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках токена"
+               },
+               "description": {
+                  "$ref": "#/definitions/string350",
+                  "description": "Описание ошибки"
+               },
+               "params": {
+                  "type": [
+                     "array",
+                     "null"
+                  ],
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "key": {
+                           "$ref": "#/definitions/string50"
+                        },
+                        "value": {
+                           "$ref": "#/definitions/string350"
+                        }
+                     },
+                     "required": [
+                        "key",
+                        "value"
+                     ]
+                  }
+               },
+               "time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Время формирования ответа"
+               }
+            },
+            "required": [
+               "code",
+               "description",
+               "time"
+            ]
+         }
+      }
+   },
+   "required": [
+      "id_jwt",
+      "entity_action",
+      "stage"
+   ],
+   "definitions": {
+      "int8": {
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "stage_type": {
+         "type": "string",
+         "enum": [
+            "validate",
+            "business"
+         ],
+         "description": "Стадия обработки"
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      },
+      "string350": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 350
+      },
+      "string500": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 500
+      },
+      "string1024": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 1024
+      }
+   }
+}

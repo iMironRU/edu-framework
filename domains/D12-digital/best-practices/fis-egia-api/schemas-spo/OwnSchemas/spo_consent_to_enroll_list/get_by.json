@@ -1,0 +1,41 @@
+{
+   "description": "Согласие на зачисление (из ЕПГУ)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_consent_to_enroll_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_entrant": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор поступающего"
+               }
+            },
+            "required": [
+               "id_object",
+               "id_entrant"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_consent_to_enroll_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      }
+   }
+}

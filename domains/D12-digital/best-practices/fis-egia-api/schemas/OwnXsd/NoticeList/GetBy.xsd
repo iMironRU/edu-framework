@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="NoticeList">
+               <xs:annotation>
+                  <xs:documentation>Получить информацию по уведомлениям (сущность)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="Notice" minOccurs="1" maxOccurs="200">
+                        <xs:annotation>
+                           <xs:documentation>Объект</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element type="BigIntType" name="IdObject">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках данного токена</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="BigIntType" name="IdEntrant">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор поступающего, сгенерированный Сервисом приема</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

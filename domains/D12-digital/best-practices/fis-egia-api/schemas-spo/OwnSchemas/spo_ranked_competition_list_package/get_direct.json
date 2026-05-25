@@ -1,0 +1,36 @@
+{
+   "description": "Пакет конкурсного списка (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "ranked_competition_list_package": {
+         "type": "object",
+         "additionalProperties": { "type": "null" },
+         "description": "Пакет конкурсного списка (сущность)",
+         "properties": {
+            "id_object": {
+               "$ref": "#/definitions/int8",
+               "description": "Уникальный идентификатор объекта в рамках данного токена"
+            },
+            "id": {
+               "$ref": "#/definitions/int8",
+               "description": "Идентификатор конкурсного списка"
+            }
+         },
+         "required": [
+            "id_object",
+            "id"
+         ]
+      }
+   },
+   "required": [
+      "ranked_competition_list_package"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      }
+   }
+}

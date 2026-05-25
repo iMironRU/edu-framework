@@ -1,0 +1,183 @@
+{
+   "description": "Список заявлений поступающего (сущность)",
+   "type": "object",
+   "additionalProperties": {
+      "type": "null"
+   },
+   "properties": {
+      "id_jwt": {
+         "$ref": "#/definitions/int8",
+         "description": "Уникальный идентификатор запроса на обработку данных (токена)"
+      },
+      "entity_action": {
+         "$ref": "#/definitions/string50",
+         "description": "Имя сущности и действие над сущностью сконкатенированное через '.'. Например \"spo_сampaign_list.add\""
+      },
+      "stage": {
+         "$ref": "#/definitions/stage_type",
+         "description": "Наименование стадии обработки на которой завершилось выполнение токена"
+      },
+      "success_result_list": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "additionalProperties": {
+               "type": "null"
+            },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления"
+               },
+               "id_entrant": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор профиля поступающего"
+               },
+               "unique_code_profile": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код поступающего"
+               },
+               "id_application_status": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Статус заявления (классификатор application_status_cls)"
+               },
+               "application_specialty_list": {
+                  "type": "array",
+                  "description": "Список специальностей",
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": {
+                        "type": "null"
+                     },
+                     "properties": {
+                        "id_specialty": {
+                           "$ref": "#/definitions/int8",
+                           "description": "Уникальный идентификатор специальности"
+                        },
+                        "id_application_specialty_status": {
+                           "$ref": "#/definitions/int4",
+                           "description": "Статус специальности (классификатор application_specialty_status_cls)"
+                        }
+                     },
+                     "required": [
+                        "id_specialty",
+                        "id_application_specialty_status"
+                     ]
+                  }
+               }
+            },
+            "required": [
+               "id_object",
+               "id_application",
+               "id_entrant",
+               "unique_code_profile",
+               "id_application_status",
+               "application_specialty_list"
+            ]
+         }
+      },
+      "error_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": {
+               "type": "null"
+            },
+            "properties": {
+               "code": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код ошибки"
+               },
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках токена"
+               },
+               "description": {
+                  "$ref": "#/definitions/string350",
+                  "description": "Описание ошибки"
+               },
+               "params": {
+                  "type": [
+                     "array",
+                     "null"
+                  ],
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": {
+                        "type": "null"
+                     },
+                     "properties": {
+                        "key": {
+                           "$ref": "#/definitions/string50"
+                        },
+                        "value": {
+                           "$ref": "#/definitions/string350"
+                        }
+                     },
+                     "required": [
+                        "key",
+                        "value"
+                     ]
+                  }
+               },
+               "time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Время формирования ответа"
+               }
+            },
+            "required": [
+               "code",
+               "description",
+               "time"
+            ]
+         }
+      }
+   },
+   "required": [
+      "id_jwt",
+      "entity_action",
+      "stage"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854776000
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      },
+      "string350": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 350
+      },
+      "stage_type": {
+         "type": "string",
+         "enum": [
+            "validate",
+            "business"
+         ]
+      }
+   }
+}

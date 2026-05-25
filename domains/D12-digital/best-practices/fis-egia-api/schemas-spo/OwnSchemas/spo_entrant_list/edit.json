@@ -1,0 +1,147 @@
+{
+    "description": "Cписок профилей поступающих (сущность)",
+    "type": "object",
+    "additionalProperties": {
+        "type": "null"
+    },
+    "properties": {
+        "spo_entrant_list": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "maxItems": 200,
+            "description": "Список профилей поступающих (сущность)",
+            "items": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "null"
+                },
+                "description": "Объект",
+                "properties": {
+                    "id_object": {
+                        "$ref": "#/definitions/int8",
+                        "description": "Уникальный идентификатор объекта в рамках данного токена"
+                    },
+                    "id": {
+                        "$ref": "#/definitions/int8",
+                        "description": "Id поступающего"
+                    },
+                    "snils": {
+                        "$ref": "#/definitions/snils_type",
+                        "description": "СНИЛС - обязательный для граждан РФ"
+                    },
+                    "id_gender": {
+                        "$ref": "#/definitions/int2",
+                        "description": "Идентификатор классификатора gender_cls"
+                    },
+                    "birthday": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Дата рождения. Шаблон \"2006-01-02\""
+                    },
+                    "birthplace": {
+                        "$ref": "#/definitions/string1024",
+                        "description": "Место рождения"
+                    },
+                    "phone": {
+                        "$ref": "#/definitions/string25",
+                        "description": "Телефон"
+                    },
+                    "email": {
+                        "$ref": "#/definitions/string256",
+                        "description": "Электронный адрес"
+                    },
+                    "address_list": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "minItems": 1,
+                        "description": "Список адресов абитуриента",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "null"
+                            },
+                            "properties": {
+                                "full_addr": {
+                                    "$ref": "#/definitions/string1024",
+                                    "description": "Полный адрес"
+                                },
+                                "id_region": {
+                                    "$ref": "#/definitions/int4",
+                                    "description": "Идентификатор классификатора region_cls"
+                                },
+                                "index": {
+                                    "$ref": "#/definitions/string6",
+                                    "description": "Индекс"
+                                },
+                                "is_registration": {
+                                    "type": "boolean",
+                                    "description": "Признак адреса регистрации"
+                                }
+                            },
+                            "required": [
+                                "full_addr",
+                                "is_registration",
+                                "id_region"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "id_object",
+                    "id",
+                    "id_gender",
+                    "birthday",
+                    "birthplace",
+                    "address_list"
+                ]
+            }
+        }
+    },
+    "required": [
+        "spo_entrant_list"
+    ],
+    "definitions": {
+        "int2": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 32767
+        },
+        "int4": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+        },
+        "snils_type": {
+            "type": "string",
+            "pattern": "^\\d{11}$",
+            "minLength": 11,
+            "maxLength": 11
+        },
+        "int8": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9223372036854776000
+        },
+        "string6": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6
+        },
+        "string25": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 25
+        },
+        "string256": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+        },
+        "string1024": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+        }
+    }
+}

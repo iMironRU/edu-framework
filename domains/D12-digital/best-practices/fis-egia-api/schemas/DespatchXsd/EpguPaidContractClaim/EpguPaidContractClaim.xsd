@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="EpguPaidContractClaim">
+               <xs:annotation>
+                  <xs:documentation>Претензия от поступающего по проекту платного договора</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element type="BigIntType" name="IdCompetitiveGroup">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор КГ заявления (CompetitiveGroupList) сгенерированный Сервисом приема</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="String1024Type" name="ClaimOffer">
+                        <xs:annotation>
+                           <xs:documentation>Текст претензии</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="String1024Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="1024" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

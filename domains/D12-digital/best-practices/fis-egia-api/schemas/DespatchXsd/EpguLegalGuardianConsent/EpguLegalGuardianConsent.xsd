@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="EpguLegalGuardianConsent">
+               <xs:annotation>
+                  <xs:documentation>Согласие законного представителя</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element type="BigIntType" name="IdCompetitiveGroup">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор КГ заявления (CompetitiveGroupList)</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="String50Type" name="OfferNumber">
+                        <xs:annotation>
+                           <xs:documentation>Номер предложения</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:dateTime" name="CreatedDateTime">
+                        <xs:annotation>
+                           <xs:documentation>Дата и время добавления согласия в Сервис приема. Формат RFC3339 шаблон "2006-01-02T15:04:05+03:00". Значение только по московскому времени</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="String50Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="50" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

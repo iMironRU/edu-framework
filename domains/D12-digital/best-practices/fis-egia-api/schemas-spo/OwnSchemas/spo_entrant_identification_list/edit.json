@@ -1,0 +1,56 @@
+{
+   "type": "object",
+   "description": "Установление активного ДУЛ",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_entrant_identification_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор"
+               },
+               "id": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Идентификатор ДУЛ, который надо сделать активным"
+               }
+            },
+            "required": [
+               "id_object",
+               "id"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_entrant_identification_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 9223372036854775807
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      },
+      "string256": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 256
+      }
+   }
+}

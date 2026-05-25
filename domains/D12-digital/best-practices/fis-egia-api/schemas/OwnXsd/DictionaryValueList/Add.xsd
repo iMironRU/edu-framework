@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="DictionaryValueList">
+               <xs:annotation>
+                  <xs:documentation>Справочники вуза (сущность)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="DictionaryValue" minOccurs="1" maxOccurs="200">
+                        <xs:annotation>
+                           <xs:documentation>Объект</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:all>
+                              <xs:element type="BigIntType" name="IdObject">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках данного токена</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="UidType" name="Uid">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках организации сгенерированный организацией</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="Int4Type" name="IdDictionaryType">
+                                 <xs:annotation>
+                                    <xs:documentation>Идентификатор классификатора DictionaryTypeCls</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String255Type" name="Value">
+                                 <xs:annotation>
+                                    <xs:documentation>Новое значение справочника</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                           </xs:all>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:maxInclusive value="9223372036854775807" />
+        </xs:restriction>
+    </xs:simpleType>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String255Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="255" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="UidType">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="36" />
+         <xs:minLength value="10" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="EpguPaidContractData">
+               <xs:annotation>
+                  <xs:documentation>Данные из ЕПГУ для формирования договора</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element type="BigIntType" name="IdCompetitiveGroup">
+                        <xs:annotation>
+                           <xs:documentation>Уникальный идентификатор КГ заявления (CompetitiveGroupList) сгенерированный Сервисом приема</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="SideType" name="SideA">
+                        <xs:annotation>
+                           <xs:documentation>Данные стороны А платного договора</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="SideType" name="SideB" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Данные стороны B платного договора</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="SideType" name="SideC" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Данные стороны C платного договора</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="PaymentType" name="Payment" minOccurs="0">
+                        <xs:annotation>
+                           <xs:documentation>Данные оплаты</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                     <xs:element type="xs:boolean" name="Discount">
+                        <xs:annotation>
+                           <xs:documentation>Нужна ли скидка?</xs:documentation>
+                        </xs:annotation>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="SideType">
+      <xs:annotation>
+         <xs:documentation>Данные стороны платного договора</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element type="xs:boolean" name="Payer">
+            <xs:annotation>
+               <xs:documentation>Является плательщиком</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:choice>
+            <xs:element type="IndividualSideType" name="IndividualSide">
+               <xs:annotation>
+                  <xs:documentation>Данные физ.лица</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element type="EntitySideType" name="EntitySide">
+               <xs:annotation>
+                  <xs:documentation>Данные юр.лица</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+         </xs:choice>
+         <xs:element name="FuiList" minOccurs="0">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element type="String256Type" name="Fui" minOccurs="1" maxOccurs="4">
+                     <xs:annotation>
+                        <xs:documentation>Уникальный идентификатор прикладываемого файла в Сервисе Приема. По этому идентификатору можно получить файл в /api/file/get</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="IndividualSideType">
+      <xs:annotation>
+         <xs:documentation>Данные физического лица</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element type="String256Type" name="Surname">
+            <xs:annotation>
+               <xs:documentation>Фамилия</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String256Type" name="Name">
+            <xs:annotation>
+               <xs:documentation>Имя</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String256Type" name="Patronymic" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Отчество</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="Int4Type" name="IdDocumentType">
+            <xs:annotation>
+               <xs:documentation>Тип документа, удостоверяющего личность. Идентификатор классификатора DocumentTypeCls</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String20Type" name="DocSeries" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Серия ДУЛ</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String50Type" name="DocNumber">
+            <xs:annotation>
+               <xs:documentation>Номер ДУЛ</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String256Type" name="DocOrganization">
+            <xs:annotation>
+               <xs:documentation>Организация, выдавшая документ</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String50Type" name="SubdivisionCode" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Код подразделения</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="xs:date" name="IssueDate" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Дата выдачи. Шаблон "2006-01-02"</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="xs:date" name="Birthdate">
+            <xs:annotation>
+               <xs:documentation>Дата рождения. Шаблон "2006-01-02"</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String1024Type" name="Birthplace">
+            <xs:annotation>
+               <xs:documentation>Место рождения</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String1024Type" name="RegistrationAddress">
+            <xs:annotation>
+               <xs:documentation>Адрес регистрации</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="SnilsType" name="Snils" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>СНИЛС</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="PhoneList" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Номера телефонов</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element type="String256Type" name="Phone" minOccurs="1" maxOccurs="unbounded"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element type="String256Type" name="Email" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Адрес электронной почты</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="RelationShip">
+            <xs:annotation>
+               <xs:documentation>Код ответа.
+               1 - Сам поступающий.
+               2 - Родитель.
+               3 - Близкий родственник (не родитель).
+               4 - Усыновитель.
+               5 - Опекун или попечитель.
+               6 - Другой человек.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+               <xs:restriction base="xs:positiveInteger">
+                  <xs:maxInclusive value="6" />
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="EntitySideType">
+      <xs:annotation>
+         <xs:documentation>Данные юридического лица</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element type="String1024Type" name="IssueOrganizationName">
+            <xs:annotation>
+               <xs:documentation>Наименование организации</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String9Type" name="Kpp" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>КПП</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String12Type" name="Inn" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>ИНН</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String13Type" name="Ogrn" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>ОГРН</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String10Type" name="Bik" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>БИК</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String20Type" name="Rs" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>р/счет</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String20Type" name="Ks" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>к/счет</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String1024Type" name="RegistrationAddress">
+            <xs:annotation>
+               <xs:documentation>Адрес организации</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="PhoneList" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Номера телефонов организации</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element type="String256Type" name="Phone" minOccurs="1" maxOccurs="unbounded"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element type="String256Type" name="Email" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Адрес электронной почты</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String256Type" name="Surname">
+            <xs:annotation>
+               <xs:documentation>Фамилия должностного лица</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String256Type" name="Name">
+            <xs:annotation>
+               <xs:documentation>Имя должностного лица</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String256Type" name="Patronymic" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Отчество должностного лица</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String256Type" name="Post" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Должность должностного лица</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String1024Type" name="BankName" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Наименование банка</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="PaymentType">
+      <xs:annotation>
+         <xs:documentation>Данные оплаты</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="PaymentMethod">
+            <xs:annotation>
+               <xs:documentation>Код ответа.
+               1 - Собственные средства.
+               2 - Образовательный кредит.
+               3 - Материнский капитал.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+               <xs:restriction base="xs:positiveInteger">
+                  <xs:maxInclusive value="3" />
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element type="String256Type" name="Surname" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Фамилия владельца сертификата маткапитала</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String256Type" name="Name" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Имя владельца сертификата маткапитала</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String256Type" name="Patronymic" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Отчество владельца сертификата маткапитала</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String50Type" name="DocSeries" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Серия сертификата маткапитала</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String50Type" name="DocNumber" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Номер сертификата маткапитала</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="String256Type" name="DocOrganization" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Организация, выдавшая сертификат маткапитала</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="xs:date" name="IssueDate" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Дата выдачи сертификата маткапитала. Шаблон "2006-01-02"</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name="Int4Type">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="2147483647" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="SnilsType">
+      <xs:annotation>
+         <xs:documentation>СНИЛС</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:length value="11" />
+         <xs:pattern value="\d{11}" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String1024Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="1024" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String256Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="255" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String50Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="50" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String20Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="20" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String13Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="13" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String12Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="12" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String10Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="10" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String9Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="9" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

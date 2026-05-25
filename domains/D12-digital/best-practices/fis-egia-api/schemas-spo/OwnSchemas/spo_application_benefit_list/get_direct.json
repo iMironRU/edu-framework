@@ -1,0 +1,46 @@
+{
+   "description": "Список льгот в рамках заявлений поступающего (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_application_benefit_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 200,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления"
+               }
+            },
+            "required": [
+               "id_object",
+               "id_application"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_application_benefit_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      }
+   }
+}

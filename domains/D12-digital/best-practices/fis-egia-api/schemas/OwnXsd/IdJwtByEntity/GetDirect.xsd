@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="IdJwtByEntity" minOccurs="1" maxOccurs="1">
+               <xs:annotation>
+                  <xs:documentation>Получение информации о запросах в Сервисе приема по сущности</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="Entity">
+                        <xs:annotation>
+                           <xs:documentation>Название сущности</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                           <xs:restriction base="xs:string">
+                              <xs:enumeration value="ApplicationList" />
+                              <xs:enumeration value="AvailabilityHigherEducationFrdoList" />
+                              <xs:enumeration value="CompetitionList" />
+                              <xs:enumeration value="CompetitiveGroupAchievementList" />
+                              <xs:enumeration value="CompetitiveGroupBenefitList" />
+                              <xs:enumeration value="CompetitiveGroupList" />
+                              <xs:enumeration value="CompetitiveGroupResultList" />
+                              <xs:enumeration value="CompetitiveGroupSyncUpload" />
+                              <xs:enumeration value="ConsentToEnrollList" />
+                              <xs:enumeration value="DictionaryValueList" />
+                              <xs:enumeration value="DocumentList" />
+                              <xs:enumeration value="EducationalProgramList" />
+                              <xs:enumeration value="EgeResultList" />
+                              <xs:enumeration value="EntranceTestAgreedList" />
+                              <xs:enumeration value="EntranceTestList" />
+                              <xs:enumeration value="EntranceTestPlaceList" />
+                              <xs:enumeration value="EntranceTestResultList" />
+                              <xs:enumeration value="EntrantList" />
+                              <xs:enumeration value="LegalGuardianConsentList" />
+                              <xs:enumeration value="NoticeList" />
+                              <xs:enumeration value="OrderList" />
+                              <xs:enumeration value="PaidContract" />
+                              <xs:enumeration value="PlaceDistributionList" />
+                              <xs:enumeration value="RankedCompetitionListPackage" />
+                              <xs:enumeration value="SubjectEpguList" />
+                              <xs:enumeration value="TargetContractList" />
+                           </xs:restriction>
+                        </xs:simpleType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

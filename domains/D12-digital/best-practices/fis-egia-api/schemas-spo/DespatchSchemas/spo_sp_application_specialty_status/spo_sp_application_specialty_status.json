@@ -1,0 +1,42 @@
+{
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "description": "Статус специальности, присвоенный Сервисом приема",
+   "properties": {
+     "spo_sp_application_specialty_status": {
+       "type": "object",
+       "additionalProperties": { "type": "null" },
+       "properties": {
+           "id_application": {
+              "$ref": "#/definitions/int8",
+              "description": "Уникальный идентификатор заявления (сущность spo_application_list)"
+           },
+           "id_specialty": {
+              "$ref": "#/definitions/int8",
+              "description": "Уникальный идентификатор специальности (сущность spo_secialty_list)"
+           },
+           "id_specialty_status": {
+             "$ref": "#/definitions/int4",
+             "description": "Статус cпециальности (классификатор application_specialty_status_cls)"
+           }
+       },
+       "required": [
+           "id_application",
+           "id_specialty",
+           "id_specialty_status"
+         ]
+     }
+   },
+   "definitions": {
+     "int8": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 9223372036854775807
+     },
+     "int4": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 2147483647
+     }
+   }
+ }

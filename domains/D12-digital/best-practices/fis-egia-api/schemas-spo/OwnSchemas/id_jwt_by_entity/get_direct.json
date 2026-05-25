@@ -1,0 +1,42 @@
+{
+   "description": "Получение информации о запросах в Сервисе приема по сущности",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "id_jwt_by_entity": {
+         "type": "object",
+         "additionalProperties": { "type": "null" },
+         "properties": {
+            "entity": {
+               "type": "string",
+               "enum": [
+                  "spo_addition_info_list",
+			         "spo_application_achievement_list",
+			         "spo_application_benefit_list",
+			         "spo_application_list",
+			         "spo_application_specialty_list",
+			         "spo_application_specialty_status_list",
+			         "spo_application_status_list",
+			         "spo_campaign_list",
+			         "spo_consent_to_enroll_list",
+			         "spo_document_list",
+			         "spo_entrance_test_schedule_list",
+			         "spo_entrant_identification_list",
+			         "spo_entrant_list",
+			         "spo_original_education_document_list",
+			         "spo_ranked_competition_list_package",
+			         "spo_specialty_event_list",
+			         "spo_specialty_list"
+               ]
+            }
+         },
+         "required": [
+            "entity"
+         ]
+      }
+   },
+   "required": [
+      "id_jwt_by_entity"
+   ],
+   "definitions": {}
+}

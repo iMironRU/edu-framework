@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="PackageData">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="OrderList">
+               <xs:annotation>
+                  <xs:documentation>Включение в приказ / исключение из приказа (сущность)</xs:documentation>
+               </xs:annotation>
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="Order" minOccurs="1" maxOccurs="1">
+                        <xs:annotation>
+                           <xs:documentation>Объект</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                           <xs:all>
+                              <xs:element type="BigIntType" name="IdObject">
+                                 <xs:annotation>
+                                    <xs:documentation>Уникальный идентификатор объекта в рамках данного токена</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="String500Type" name="OrderNumber">
+                                 <xs:annotation>
+                                    <xs:documentation>Номер приказа</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element type="xs:date" name="OrderDate">
+                                 <xs:annotation>
+                                    <xs:documentation>Дата приказа. Шаблон "2006-01-02"</xs:documentation>
+                                 </xs:annotation>
+                              </xs:element>
+                              <xs:element name="IdStatus">
+                                 <xs:annotation>
+                                    <xs:documentation>Статус КГ заявления. Идентификатор классификатора CompetitiveGroupStatusCls. Передавать только 11 или 14 статусы</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:simpleType>
+                                    <xs:restriction base="xs:positiveInteger">
+                                       <xs:minInclusive value="11" />
+                                       <xs:maxInclusive value="14" />
+                                    </xs:restriction>
+                                 </xs:simpleType>
+                              </xs:element>
+                              <xs:element name="IdCompetitiveGroupList">
+                                 <xs:annotation>
+                                    <xs:documentation>Список идентификаторов КГ заявлений</xs:documentation>
+                                 </xs:annotation>
+                                 <xs:complexType>
+                                    <xs:sequence>
+                                       <xs:element type="BigIntType" name="Id" maxOccurs="1000">
+                                          <xs:annotation>
+                                             <xs:documentation>Уникальный идентификатор КГ заявления (CompetitiveGroupList)</xs:documentation>
+                                          </xs:annotation>
+                                       </xs:element>
+                                    </xs:sequence>
+                                 </xs:complexType>
+                              </xs:element>
+                           </xs:all>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="BigIntType">
+      <xs:restriction base="xs:positiveInteger">
+         <xs:maxInclusive value="9223372036854775807" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="String500Type">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="500" />
+         <xs:minLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

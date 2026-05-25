@@ -1,0 +1,62 @@
+{
+   "description": "Изменение статусов конкурсных групп списком (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_application_specialty_status_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "minItems": 1,
+         "maxItems": 1000,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id_application": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления"
+               },
+               "id_specialty": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор специальности (сущность spo_secialty_list)"
+               },
+               "id_application_specialty_status": {
+                  "$ref": "#/definitions/int4",
+                  "description": "Статус специальности (классификатор application_specialty_status_cls)"
+               },
+               "status_comment": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "description": "Комментарий к статусу"
+               }
+            },
+            "required": [
+               "id_object",
+               "id_application",
+               "id_specialty",
+               "id_application_specialty_status"
+            ]
+         }
+      }
+   },
+   "required": [
+      "spo_application_specialty_status_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      }
+   }
+}

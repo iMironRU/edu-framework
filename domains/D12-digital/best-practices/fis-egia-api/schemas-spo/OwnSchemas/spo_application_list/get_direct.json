@@ -1,0 +1,41 @@
+{
+   "description": "Список заявлений поступающего (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "spo_application_list": {
+         "type": "array",
+         "uniqueItems": true,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор заявления"
+               }
+            },
+            "required": [
+               "id_object",
+               "id"
+            ]
+         },
+         "minItems": 1,
+         "maxItems": 200
+      }
+   },
+   "required": [
+      "spo_application_list"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      }
+   }
+}

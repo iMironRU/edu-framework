@@ -1,0 +1,43 @@
+{
+    "type": "object",
+    "additionalProperties": { "type": "null" },
+    "description": "Согласие на зачисление",
+    "properties": {
+      "spo_epgu_consent_to_enroll": {
+        "type": "object",
+        "additionalProperties": { "type": "null" },
+        "properties": {
+          "id_application": {
+            "$ref": "#/definitions/int8",
+            "description": "Уникальный идентификатор заявления"
+          },
+          "id_specialty": {
+            "$ref": "#/definitions/int8",
+            "description": "Уникальный идентификатор специальности"
+          },
+          "id_entrant": {
+            "$ref": "#/definitions/int8",
+            "description": "Уникальный идентификатор поступающего"
+          },
+          "agree": {
+            "type": "boolean",
+            "description": "Согласие/отзыв на зачисление"
+          },
+          "agree_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Дата подачи"
+          }
+        },
+        "required": ["id_application", "id_specialty", "id_entrant", "agree", "agree_date"]
+      }
+    },
+    "required": ["spo_epgu_consent_to_enroll"],
+    "definitions": {
+      "int8": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 9223372036854775807
+      }
+    }
+  }

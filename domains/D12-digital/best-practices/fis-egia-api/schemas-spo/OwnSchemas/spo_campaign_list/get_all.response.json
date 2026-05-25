@@ -1,0 +1,176 @@
+{
+   "description": "Приемная кампания (сущность)",
+   "type": "object",
+   "additionalProperties": { "type": "null" },
+   "properties": {
+      "id_jwt": {
+         "$ref": "#/definitions/int8",
+         "description": "Уникальный идентификатор запроса на обработку данных (токена)"
+      },
+      "entity_action": {
+         "$ref": "#/definitions/string50",
+         "description": "Имя сущности и действие над сущностью сконкатенированное через '.'. Например \"spo_сampaign_list.add\""
+      },
+      "stage": {
+         "type": "string",
+         "enum": [
+            "validate",
+            "business"
+         ],
+         "description": "Наименование стадии обработки, на которой завершилось выполнение токена"
+      },
+      "success_result_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "minItems": 1,
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках данного токена"
+               },
+               "id": {
+                  "$ref": "#/definitions/int8",
+                  "description": "id объекта ПК"
+               },
+               "uid": {
+                  "$ref": "#/definitions/uid",
+                  "description": "Уникальный идентификатор приемной кампании"
+               },
+               "name": {
+                  "$ref": "#/definitions/string500",
+                  "description": "Наименование"
+               },
+               "year_start": {
+                  "$ref": "#/definitions/yearstart",
+                  "description": "Учебный год приемной кампании в котором начинается прием"
+               },
+               "org_time_zone": {
+                  "$ref": "#/definitions/orgtimezone",
+                  "description": "Часовой пояс относительно UTC (например, для Москвы = 3)"
+               }
+            },
+            "required": [
+               "id_object",
+               "id",
+               "uid",
+               "name",
+               "year_start",
+               "org_time_zone"
+            ]
+         }
+      },
+      "error_list": {
+         "type": [
+            "array",
+            "null"
+         ],
+         "items": {
+            "type": "object",
+            "additionalProperties": { "type": "null" },
+            "properties": {
+               "code": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный код ошибки"
+               },
+               "id_object": {
+                  "$ref": "#/definitions/int8",
+                  "description": "Уникальный идентификатор объекта в рамках токена"
+               },
+               "description": {
+                  "$ref": "#/definitions/string350",
+                  "description": "Описание ошибки"
+               },
+               "params": {
+                  "type": [
+                     "array",
+                     "null"
+                  ],
+                  "items": {
+                     "type": "object",
+                     "additionalProperties": { "type": "null" },
+                     "properties": {
+                        "key": {
+                           "$ref": "#/definitions/string50"
+                        },
+                        "value": {
+                           "$ref": "#/definitions/string350"
+                        }
+                     },
+                     "required": [
+                        "key",
+                        "value"
+                     ]
+                  }
+               },
+               "time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Время формирования ответа"
+               }
+            },
+            "required": [
+               "code",
+               "description",
+               "time"
+            ]
+         }
+      }
+   },
+   "required": [
+      "id_jwt",
+      "entity_action",
+      "stage"
+   ],
+   "definitions": {
+      "int8": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 9223372036854775807
+      },
+      "int4": {
+         "type": "integer",
+         "minimum": 1,
+         "maximum": 2147483647
+      },
+      "string50": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 50
+      },
+      "string200": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 200
+      },
+      "string350": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 350
+      },
+      "uid": {
+         "type": "string",
+         "minLength": 10,
+         "maxLength": 36
+      },
+      "string500": {
+         "type": "string",
+         "minLength": 1,
+         "maxLength": 500
+      },
+      "yearstart": {
+         "type": "integer",
+         "minimum": 2025,
+         "maximum": 2026
+      },
+      "orgtimezone": {
+         "type": "integer",
+         "minimum": 2,
+         "maximum": 12
+      }
+   }
+}
